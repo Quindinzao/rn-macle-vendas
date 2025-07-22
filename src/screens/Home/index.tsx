@@ -3,18 +3,19 @@ import { View } from 'react-native';
 
 // Components
 import Header from '../../components/Header';
-import LoginRegisterForm from '../../components/LoginRegisterForm';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import RadioButton from '../../components/RadioButton';
 
-const Login: React.FC = () => {
+const Home: React.FC = () => {
+  const list = ['Hello', 'World'];
   return (
     <View style={layout.container}>
-      <Header title={'Entre ou cadastre-se'} typeHeader={'long'} />
-      <LoginRegisterForm />
+      <Header title={'Produtos'} typeHeader={'short'} />
+      <RadioButton items={list} />
     </View>
   );
 };
 
-export default Login;
+export default Home;

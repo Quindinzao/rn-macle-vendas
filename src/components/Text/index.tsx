@@ -17,8 +17,6 @@ const Text: React.FC<TextProps> = ({
   const theme = useTheme<Theme>();
   const styles = createStyles(theme);
 
-  console.log('AAAAAAAAA');
-
   return <RNPText style={[styles[type], { color }, style]}>{children}</RNPText>;
 };
 

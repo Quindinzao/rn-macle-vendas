@@ -10,7 +10,7 @@ export const createStyles = (theme: Theme, typeHeader: 'long' | 'short') =>
   StyleSheet.create({
     container: {
       width: width,
-      height: typeHeader === 'long' ? width : 220,
+      height: typeHeader === 'long' ? width : 240,
       position: 'relative',
       alignItems: 'center',
     },
