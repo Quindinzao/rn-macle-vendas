@@ -1,9 +1,14 @@
+// External libraries
+import { useState } from 'react';
 import { View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+
+// Components
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
-import { useState } from 'react';
+
+// Styles
 import { createStyles } from './styles';
-import { useTheme } from 'react-native-paper';
 import { Theme } from '../../styles/theme';
 
 const LoginRegisterForm: React.FC = () => {

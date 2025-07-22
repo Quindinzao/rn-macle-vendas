@@ -1,5 +1,7 @@
-import React from 'react';
+// External libraries
 import { Button as RNPButton, useTheme } from 'react-native-paper';
+
+// Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
 

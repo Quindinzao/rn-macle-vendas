@@ -1,9 +1,14 @@
+// External libraries
 import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { createStyles } from './styles';
+
+// Components
 import Header from '../../components/Header';
-import { Theme } from '../../styles/theme';
 import LoginRegisterForm from '../../components/LoginRegisterForm';
+
+// Styles
+import { createStyles } from './styles';
+import { Theme } from '../../styles/theme';
 
 const Login: React.FC = () => {
   const theme: Theme = useTheme();

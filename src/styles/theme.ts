@@ -1,5 +1,8 @@
+// External libraries
 import { MD3LightTheme as DefaultTheme } from 'react-native-paper';
 import { Platform } from 'react-native';
+
+// Styles
 import { colors } from './colors';
 
 const ios = Platform.OS === 'ios';

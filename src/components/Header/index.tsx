@@ -4,6 +4,7 @@ import { Surface, useTheme } from 'react-native-paper';
 
 // Components
 import Text from '../Text';
+import Button from '../Button';
 
 // Assets
 import Logo from '../../assets/icons/Logo';
@@ -12,7 +13,6 @@ import Arrow from '../../assets/icons/Arrow';
 // Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
-import Button from '../Button';
 
 interface HeaderProps {
   title: string;

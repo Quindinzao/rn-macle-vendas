@@ -1,4 +1,7 @@
+// External libraries
 import { Dimensions, StyleSheet } from 'react-native';
+
+// Styles
 import { Theme } from '../../styles/theme';
 
 const width = Dimensions.get('screen').width;
