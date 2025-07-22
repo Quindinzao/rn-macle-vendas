@@ -1,0 +1,15 @@
+export const colors = {
+  blue_900: '#06022E',
+  blue_500: '#0F069E',
+  blue_400: '#0D33CF',
+  blue_200: '#80B0FF',
+  blue_100: '#BDD6FF',
+  black: '#000000',
+  gray_700: '#595959',
+  gray_600: '#838383',
+  gray_200: '#E6E6E6',
+  white: '#FFFFFF',
+  orange_400: '#FFA033',
+  red_500: '#FF0400',
+  green_400: '#24CF0D',
+};
