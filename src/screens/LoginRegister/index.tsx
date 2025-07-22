@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Header title={'Entre ou cadastre-se'} typeHeader={'long'} isBack />
+      <Header title={'Entre ou cadastre-se'} typeHeader={'long'} />
       <LoginRegisterForm />
     </View>
   );

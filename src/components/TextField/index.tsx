@@ -1,18 +1,12 @@
 // External libraries
 import { TextInput, useTheme } from 'react-native-paper';
 
+// Interfaces
+import { TextFieldProps } from '../../interfaces/TextFieldProps';
+
 // Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
-
-interface TextFieldProps {
-  label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  secureTextEntry?: boolean;
-  keyboardType?: 'default' | 'email-address' | 'numeric';
-  style?: object;
-}
 
 const TextField: React.FC<TextFieldProps> = ({
   label,

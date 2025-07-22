@@ -1,17 +1,12 @@
 // External libraries
 import { Button as RNPButton, useTheme } from 'react-native-paper';
 
+// Interfaces
+import { ButtonProps } from '../../interfaces/ButtonProps';
+
 // Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
-
-interface ButtonProps {
-  children: React.ReactNode;
-  onPress: () => void;
-  mode?: 'text' | 'contained';
-  type?: 'text' | 'image';
-  style?: object;
-}
 
 const Button: React.FC<ButtonProps> = ({
   children,

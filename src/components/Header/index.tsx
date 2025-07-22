@@ -6,6 +6,9 @@ import { Surface, useTheme } from 'react-native-paper';
 import Text from '../Text';
 import Button from '../Button';
 
+// Interfaces
+import { HeaderProps } from '../../interfaces/HeaderProps';
+
 // Assets
 import Logo from '../../assets/icons/Logo';
 import Arrow from '../../assets/icons/Arrow';
@@ -13,12 +16,6 @@ import Arrow from '../../assets/icons/Arrow';
 // Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
-
-interface HeaderProps {
-  title: string;
-  isBack?: boolean;
-  typeHeader: 'long' | 'short';
-}
 
 const Header: React.FC<HeaderProps> = ({ title, isBack, typeHeader }) => {
   const theme: Theme = useTheme();
