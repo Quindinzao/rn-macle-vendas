@@ -1,3 +1,6 @@
 export interface RadioButtonProps {
-  items: string[];
+  items: {
+    title: string;
+    image?: any;
+  }[];
 }

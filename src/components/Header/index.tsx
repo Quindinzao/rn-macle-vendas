@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ title, isBack, typeHeader }) => {
           type={'image'}
           onPress={() => console.log('Hello World')}
         >
-          <Arrow />
+          <Arrow height={30} width={30} />
         </Button>
       )}
       <Logo style={styles.logo} height={58.25} width={59.5} />

@@ -18,13 +18,12 @@ const SearchRow: React.FC = () => {
 
   return (
     <View style={layout.row}>
-      <View style={styles.textField}>
-        <TextField
-          label={'Pesquise por nome ou descrição'}
-          value={search}
-          onChangeText={event => setSearch(event)}
-        />
-      </View>
+      <TextField
+        label={'Pesquise por nome ou descrição'}
+        value={search}
+        onChangeText={event => setSearch(event)}
+        style={styles.textField}
+      />
       <Button mode={'text'} type={'image'} onPress={() => console.log()}>
         <Filter />
       </Button>

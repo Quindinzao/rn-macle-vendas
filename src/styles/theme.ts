@@ -10,15 +10,14 @@ const ios = Platform.OS === 'ios';
 export const theme = {
   colors: {
     ...DefaultTheme.colors,
+    ...colors,
     primary: colors.blue_400,
     secondary: colors.blue_200,
     background: colors.white,
     surface: colors.white,
-    text: colors.black,
     error: colors.red_500,
     onSurface: colors.gray_700,
     onBackground: colors.gray_700,
-    backgroundInput: colors.gray_200,
   },
   roundness: 4,
   spacing: {

@@ -4,6 +4,6 @@ const width = Dimensions.get('screen').width;
 
 export const styles = StyleSheet.create({
   textField: {
-    width: width - 84,
+    width: width - 96,
   },
 });

@@ -13,6 +13,7 @@ export const createStyles = (theme: Theme, typeHeader: 'long' | 'short') =>
       height: typeHeader === 'long' ? width : 240,
       position: 'relative',
       alignItems: 'center',
+      marginBottom: theme.spacing.s24,
     },
     image: {
       width: width,

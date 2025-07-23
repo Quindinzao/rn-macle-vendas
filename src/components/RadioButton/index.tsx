@@ -1,7 +1,7 @@
 // External libraries
 import { useState } from 'react';
 import { View } from 'react-native';
-import { RadioButton as RNPRadioButton } from 'react-native-paper';
+import { RadioButton as RNPRadioButton, useTheme } from 'react-native-paper';
 
 // Components
 import Text from '../Text';
@@ -11,10 +11,13 @@ import { RadioButtonProps } from '../../interfaces/RadioButtonProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { styles } from './styles';
+import { createStyles } from './styles';
+import { Theme } from '../../styles/theme';
 
 const RadioButton: React.FC<RadioButtonProps> = ({ items }) => {
   const [value, setValue] = useState('');
+  const theme: Theme = useTheme();
+  const styles = createStyles(theme);
 
   return (
     <RNPRadioButton.Group
@@ -22,11 +25,12 @@ const RadioButton: React.FC<RadioButtonProps> = ({ items }) => {
       value={value}
     >
       {items &&
-        items.map((item: string, index: number) => {
+        items.map((item, index: number) => {
           return (
             <View style={layout.row} key={index}>
-              <RNPRadioButton.Android value={item} />
-              <Text style={styles.text}>{item}</Text>
+              <RNPRadioButton.Android value={item.title} />
+              {item.image && <item.image style={styles.icon} />}
+              <Text style={styles.text}>{item.title}</Text>
             </View>
           );
         })}

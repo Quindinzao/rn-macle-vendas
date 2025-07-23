@@ -13,8 +13,8 @@ export const createStyles = (theme: Theme) =>
       marginBottom: theme.spacing.s12,
     },
     content: {
-      backgroundColor: theme.colors.backgroundInput,
-      color: theme.colors.text,
+      backgroundColor: theme.colors.gray_200,
+      color: theme.colors.black,
       borderRadius: theme.roundness,
     },
   });

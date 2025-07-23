@@ -3,19 +3,24 @@ import { View } from 'react-native';
 
 // Components
 import Header from '../../components/Header';
+import SearchRow from '../../components/SearchRow';
+import ProductItem from '../../components/ProductItem';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import RadioButton from '../../components/RadioButton';
-import SearchRow from '../../components/SearchRow';
 
 const Home: React.FC = () => {
-  const list = ['Hello', 'World'];
   return (
     <View style={layout.container}>
       <Header title={'Produtos'} typeHeader={'short'} isBack />
       <SearchRow />
-      <RadioButton items={list} />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
     </View>
   );
 };

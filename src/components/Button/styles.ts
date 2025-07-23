@@ -10,7 +10,6 @@ export const createStyles = (theme: Theme, type: string) =>
       height: 54,
       justifyContent: 'center',
       alignItems: 'center',
-      width: type === 'text' ? '100%' : 54,
       borderRadius: theme.roundness,
       marginBottom: theme.spacing.s12,
     },

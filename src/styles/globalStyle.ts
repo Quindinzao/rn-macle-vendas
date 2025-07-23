@@ -1,8 +1,10 @@
 // External libraries
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 // Styles
 import { theme } from './theme';
+
+const width = Dimensions.get('screen').width;
 
 export const layout = StyleSheet.create({
   container: {
@@ -13,7 +15,7 @@ export const layout = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   row: {
-    width: '100%',
+    width: width - 24,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
