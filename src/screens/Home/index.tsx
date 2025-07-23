@@ -9,6 +9,7 @@ import ProductItem from '../../components/ProductItem';
 // Styles
 import { layout } from '../../styles/globalStyle';
 import OrderItem from '../../components/OrderItem';
+import ButtonNext from '../../components/ButtonNext';
 
 const Home: React.FC = () => {
   return (
@@ -16,10 +17,8 @@ const Home: React.FC = () => {
       <Header title={'Produtos'} typeHeader={'short'} isBack />
       <SearchRow />
       <ProductItem />
-      <ProductItem />
       <OrderItem />
-      <OrderItem />
-      <OrderItem />
+      <ButtonNext />
     </View>
   );
 };

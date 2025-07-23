@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
     <RNPButton
       mode={mode}
       onPress={onPress}
-      style={[styles.container, style]}
+      style={[styles.container, style, type === 'image' && styles.centerImage]}
       contentStyle={styles.content}
     >
       {children}

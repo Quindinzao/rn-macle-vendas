@@ -8,7 +8,7 @@ import LoginRegisterForm from '../../components/LoginRegisterForm';
 // Styles
 import { layout } from '../../styles/globalStyle';
 
-const Login: React.FC = () => {
+const LoginRegister: React.FC = () => {
   return (
     <View style={layout.container}>
       <Header title={'Entre ou cadastre-se'} typeHeader={'long'} />
@@ -17,4 +17,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginRegister;
