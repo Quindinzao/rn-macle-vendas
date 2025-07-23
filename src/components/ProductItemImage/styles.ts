@@ -9,7 +9,7 @@ export const createStyles = (theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       padding: theme.spacing.s08,
-      marginRight: theme.spacing.s16,
+      marginRight: theme.spacing.s12,
       backgroundColor: theme.colors.blue_100,
       borderRadius: theme.roundness,
     },

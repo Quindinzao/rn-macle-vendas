@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Theme } from '../../styles/theme';
+
+const width = Dimensions.get('screen').width;
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -9,7 +11,7 @@ export const createStyles = (theme: Theme) =>
       marginRight: theme.spacing.s08,
     },
     description: {
-      maxWidth: 160,
+      width: width - 232,
       marginVertical: theme.spacing.s08,
     },
   });

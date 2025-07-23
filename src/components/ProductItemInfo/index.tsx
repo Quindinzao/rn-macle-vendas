@@ -11,7 +11,7 @@ const ProductItemInfo: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text type={'titleSmall'}>Smartphone</Text>
-      <Text type={'caption'} style={styles.description}>
+      <Text type={'caption'} numberOfLines={3} style={styles.description}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
         quis euismod augue.
       </Text>

@@ -8,6 +8,7 @@ import ProductItem from '../../components/ProductItem';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import OrderItem from '../../components/OrderItem';
 
 const Home: React.FC = () => {
   return (
@@ -16,11 +17,9 @@ const Home: React.FC = () => {
       <SearchRow />
       <ProductItem />
       <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+      <OrderItem />
+      <OrderItem />
+      <OrderItem />
     </View>
   );
 };

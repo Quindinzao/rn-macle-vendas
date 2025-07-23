@@ -30,6 +30,5 @@ export const createStyles = (theme: Theme, typeHeader: 'long' | 'short') =>
     text: {
       position: 'absolute',
       bottom: theme.spacing.s64,
-      color: theme.colors.onPrimary,
     },
   });

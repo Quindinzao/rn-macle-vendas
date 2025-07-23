@@ -3,6 +3,6 @@ import { StyleProp, TextStyle } from 'react-native';
 export interface TextProps {
   children: React.ReactNode;
   type?: 'titleLarge' | 'titleMedium' | 'titleSmall' | 'text' | 'caption';
-  color?: string;
+  numberOfLines?: number;
   style?: StyleProp<TextStyle>;
 }

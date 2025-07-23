@@ -21,6 +21,7 @@ export const theme = {
   },
   roundness: 4,
   spacing: {
+    s02: 2,
     s04: 4,
     s08: 8,
     s12: 12,
