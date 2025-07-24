@@ -6,7 +6,19 @@ import Next from '../../assets/icons/Next';
 import { Theme } from '../../styles/theme';
 import { createStyles } from './styles';
 
-const OrderItem: React.FC = () => {
+interface OrderItemProps {
+  id: string;
+  requestDate: string;
+  updateDate?: string;
+  status: 'pendente' | 'concluído' | 'cancelado' | 'em andamento';
+}
+
+const OrderItem: React.FC<OrderItemProps> = ({
+  id,
+  requestDate,
+  updateDate = requestDate,
+  status,
+}) => {
   const theme: Theme = useTheme();
   const styles = createStyles(theme);
 
@@ -18,16 +30,16 @@ const OrderItem: React.FC = () => {
     >
       <View style={styles.content}>
         <Text type={'titleSmall'} style={styles.mediumSpace}>
-          Pedido #12345
+          Pedido #{id}
         </Text>
         <Text type={'caption'} style={styles.smallSpace}>
-          Solicitado no dia 01/01/2023
+          Solicitado no dia {requestDate}
         </Text>
         <Text type={'caption'} style={styles.mediumSpace}>
-          Atualizado no dia 01/01/2023
+          Atualizado no dia {updateDate}
         </Text>
         <Text type={'caption'}>
-          Status: <Text type={'caption'}>Concluído</Text>
+          Status: <Text type={'caption'}>{status}</Text>
         </Text>
         <Next style={styles.next} />
         <View style={styles.line} />
