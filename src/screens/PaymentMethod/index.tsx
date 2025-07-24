@@ -7,21 +7,20 @@ import RadioForm from '../../components/RadioForm';
 import ButtonNext from '../../components/ButtonNext';
 
 // Constants
-import { savedAddress } from '../../constants/savedAddress';
+import { paymentMethod } from '../../constants/paymentMethod';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
 
-const Address: React.FC = () => {
+const PaymentMethod: React.FC = () => {
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Endereço'} />
+        <Header title={'Método de pagamento'} />
         <View style={layout.content}>
           <RadioForm
-            title={'Endereços salvos'}
-            items={savedAddress}
-            buttonText={'Adicionar endereço'}
+            title={'Escolha o método de pagamento'}
+            items={paymentMethod}
           />
         </View>
       </ScrollView>
@@ -32,4 +31,4 @@ const Address: React.FC = () => {
   );
 };
 
-export default Address;
+export default PaymentMethod;

@@ -7,7 +7,7 @@ import RadioForm from '../../components/RadioForm';
 import ButtonNext from '../../components/ButtonNext';
 
 // Constants
-import { savedAddress } from '../../constants/savedAddress';
+import { savedCard } from '../../constants/savedCard';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
@@ -16,12 +16,12 @@ const Address: React.FC = () => {
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Endereço'} />
+        <Header title={'Cartão'} />
         <View style={layout.content}>
           <RadioForm
-            title={'Endereços salvos'}
-            items={savedAddress}
-            buttonText={'Adicionar endereço'}
+            title={'Cartões salvos'}
+            items={savedCard}
+            buttonText={'Adicionar cartão'}
           />
         </View>
       </ScrollView>

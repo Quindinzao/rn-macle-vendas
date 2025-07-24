@@ -36,4 +36,10 @@ export const layout = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
+  center: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.blue_900,
+  },
 });

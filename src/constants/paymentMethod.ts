@@ -1,8 +1,6 @@
-import Card from '../assets/icons/Card';
-
 export const paymentMethod = [
-  { title: 'Cartão de crédito', image: Card },
-  { title: 'Cartão de débito', image: Card },
+  { title: 'Cartão de crédito' },
+  { title: 'Cartão de débito' },
   { title: 'Dinheiro' },
   { title: 'PIX' },
 ];

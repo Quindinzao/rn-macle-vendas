@@ -3,7 +3,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Components
-import Address from './screens/Address';
+import Done from './screens/AllDone';
 
 // Styles
 import { theme } from './styles/theme';
@@ -12,7 +12,7 @@ const App: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <Address />
+        <Done />
       </SafeAreaProvider>
     </PaperProvider>
   );

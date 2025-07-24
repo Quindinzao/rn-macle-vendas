@@ -9,10 +9,10 @@ import Button from '../Button';
 interface RadioFormProps {
   title: string;
   items: { title: string; image?: any }[];
-  isAdd?: boolean;
+  buttonText?: string;
 }
 
-const RadioForm: React.FC<RadioFormProps> = ({ title, items, isAdd }) => {
+const RadioForm: React.FC<RadioFormProps> = ({ title, items, buttonText }) => {
   const theme: Theme = useTheme();
   const styles = createStyles(theme);
   return (
@@ -21,13 +21,13 @@ const RadioForm: React.FC<RadioFormProps> = ({ title, items, isAdd }) => {
         {title}
       </Text>
       <RadioButton items={items} />
-      {isAdd && (
+      {buttonText && (
         <Button
           mode={'text'}
           onPress={() => console.log('')}
           style={styles.button}
         >
-          Adicionar endereço
+          {buttonText}
         </Button>
       )}
     </View>
