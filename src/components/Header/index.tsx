@@ -17,7 +17,11 @@ import Arrow from '../../assets/icons/Arrow';
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
 
-const Header: React.FC<HeaderProps> = ({ title, isBack, typeHeader }) => {
+const Header: React.FC<HeaderProps> = ({
+  title,
+  isBack,
+  typeHeader = 'short',
+}) => {
   const theme: Theme = useTheme();
   const styles = createStyles(theme, typeHeader);
 

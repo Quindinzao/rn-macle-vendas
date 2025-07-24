@@ -1,5 +1,5 @@
 // External libraries
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 // Components
 import Header from '../../components/Header';
@@ -10,10 +10,12 @@ import { layout } from '../../styles/globalStyle';
 
 const LoginRegister: React.FC = () => {
   return (
-    <View style={layout.container}>
+    <ScrollView style={layout.container}>
       <Header title={'Entre ou cadastre-se'} typeHeader={'long'} />
-      <LoginRegisterForm />
-    </View>
+      <View style={layout.content}>
+        <LoginRegisterForm />
+      </View>
+    </ScrollView>
   );
 };
 

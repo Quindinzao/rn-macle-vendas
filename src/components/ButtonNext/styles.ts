@@ -1,11 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { Theme } from '../../styles/theme';
+
+const { width } = Dimensions.get('screen');
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      width: '100%',
+      width: width - 24,
       borderRadius: theme.roundness,
+      backgroundColor: theme.colors.background,
     },
     textContent: {
       justifyContent: 'flex-start',
