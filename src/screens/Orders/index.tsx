@@ -3,11 +3,10 @@ import { ScrollView, View } from 'react-native';
 
 // Components
 import Header from '../../components/Header';
-import ButtonNext from '../../components/ButtonNext';
+import OrderGroup from '../../components/OrderGroup';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import OrderGroup from '../../components/OrderGroup';
 
 const Orders: React.FC = () => {
   const items = Array.from({ length: 10 }, (_, index) => ({
@@ -32,9 +31,6 @@ const Orders: React.FC = () => {
           <OrderGroup items={items} />
         </View>
       </ScrollView>
-      <View style={layout.footer}>
-        <ButtonNext />
-      </View>
     </View>
   );
 };

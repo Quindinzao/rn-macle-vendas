@@ -7,16 +7,26 @@ import ButtonNext from '../../components/ButtonNext';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RoutesProps } from '../../interfaces/RoutesProps';
 
 const Pix: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
+  const handleGoToAllDone = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'AllDone' }],
+    });
+  };
   return (
     <View style={layout.center}>
       <ScrollView>
-        <Header title={'PIX'} />
+        <Header title={'PIX'} isBack />
         <View style={layout.content} />
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext />
+        <ButtonNext onPress={handleGoToAllDone} title={'Finalizar'} />
       </View>
     </View>
   );

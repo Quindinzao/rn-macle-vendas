@@ -8,8 +8,8 @@ import Svg, {
   SvgProps,
 } from 'react-native-svg';
 const Filter = (props: SvgProps) => (
-  <Svg width={32} height={32} viewBox="0 0 32 32" fill="none" {...props}>
-    <Rect width={32} height={32} fill="url(#pattern0_163_197)" />
+  <Svg width={30} height={30} viewBox="0 0 30 30" fill="none" {...props}>
+    <Rect width={30} height={30} fill="url(#pattern0_163_197)" />
     <Defs>
       <Pattern
         id="pattern0_163_197"

@@ -5,7 +5,12 @@ import Button from '../Button';
 import { Theme } from '../../styles/theme';
 import { createStyles } from './styles';
 
-const ButtonNext: React.FC = () => {
+interface ButtonNextProps {
+  onPress: () => void;
+  title: string;
+}
+
+const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title }) => {
   const theme: Theme = useTheme();
   const styles = createStyles(theme);
 
@@ -15,7 +20,7 @@ const ButtonNext: React.FC = () => {
         <Text style={styles.text}>Total: </Text>
         <Text type={'titleMedium'}>R$30,00</Text>
       </View>
-      <Button onPress={() => console.log('Clicou!')}>Continuar</Button>
+      <Button onPress={onPress}>{title}</Button>
     </View>
   );
 };

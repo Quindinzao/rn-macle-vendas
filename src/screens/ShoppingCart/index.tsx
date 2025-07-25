@@ -1,11 +1,15 @@
 // External libraries
 import { FlatList, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Components
 import Header from '../../components/Header';
-import SearchRow from '../../components/SearchRow';
 import ProductItem from '../../components/ProductItem';
 import ButtonNext from '../../components/ButtonNext';
+
+// Interfaces
+import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
@@ -13,35 +17,27 @@ import { layout } from '../../styles/globalStyle';
 const mockData = [
   { id: '1', name: 'Produto 1' },
   { id: '2', name: 'Produto 2' },
-  { id: '3', name: 'Produto 3' },
-  { id: '4', name: 'Produto 4' },
-  { id: '5', name: 'Produto 5' },
-  { id: '6', name: 'Produto 6' },
-  { id: '7', name: 'Produto 7' },
-  { id: '8', name: 'Produto 8' },
-  { id: '9', name: 'Produto 9' },
 ];
 
 const ShoppingCart: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
+  const handleGoToDelivery = () => {
+    navigation.navigate('Delivery');
+  };
   return (
     <>
       <FlatList
         data={mockData}
         keyExtractor={item => item.id}
         renderItem={() => <ProductItem />}
-        ListHeaderComponent={
-          <View style={layout.headerContainer}>
-            <Header title={'Carrinho'} />
-            <SearchRow />
-          </View>
-        }
+        ListHeaderComponent={<Header title={'Carrinho'} />}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={layout.flatListContent}
         style={layout.flatListContainer}
       />
 
       <View style={layout.footer}>
-        <ButtonNext />
+        <ButtonNext onPress={handleGoToDelivery} title={'Continuar'} />
       </View>
     </>
   );

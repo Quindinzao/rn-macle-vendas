@@ -1,9 +1,10 @@
 // External libraries
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { NavigationContainer } from '@react-navigation/native';
 
-// Components
-import Orders from './screens/Orders';
+// Routes
+import Routes from './routes';
 
 // Styles
 import { theme } from './styles/theme';
@@ -12,7 +13,7 @@ const App: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaProvider>
-        <Orders />
+        <Routes />
       </SafeAreaProvider>
     </PaperProvider>
   );

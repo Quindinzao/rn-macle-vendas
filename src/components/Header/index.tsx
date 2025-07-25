@@ -16,6 +16,7 @@ import Arrow from '../../assets/icons/Arrow';
 // Styles
 import { createStyles } from './styles';
 import { Theme } from '../../styles/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const Header: React.FC<HeaderProps> = ({
   title,
@@ -24,6 +25,13 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const theme: Theme = useTheme();
   const styles = createStyles(theme, typeHeader);
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    if (isBack) {
+      navigation.goBack();
+    }
+  };
 
   return (
     <Surface style={styles.container} elevation={0}>
@@ -40,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
           style={styles.back}
           mode={'text'}
           type={'image'}
-          onPress={() => console.log('Hello World')}
+          onPress={handleBackPress}
         >
           <Arrow height={30} width={30} />
         </Button>

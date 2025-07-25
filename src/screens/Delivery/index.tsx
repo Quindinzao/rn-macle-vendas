@@ -1,10 +1,15 @@
 // External libraries
 import { ScrollView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Components
 import Header from '../../components/Header';
 import RadioForm from '../../components/RadioForm';
 import ButtonNext from '../../components/ButtonNext';
+
+// Iterfaces
+import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Constants
 import { transport } from '../../constants/transport';
@@ -13,10 +18,14 @@ import { transport } from '../../constants/transport';
 import { layout } from '../../styles/globalStyle';
 
 const Delivery: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
+  const handleGoToAddress = () => {
+    navigation.navigate('Address');
+  };
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Transporte'} />
+        <Header title={'Transporte'} isBack />
         <View style={layout.content}>
           <RadioForm
             title={'Deseja que produto vá até você?'}
@@ -25,7 +34,7 @@ const Delivery: React.FC = () => {
         </View>
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext />
+        <ButtonNext onPress={handleGoToAddress} title={'Continuar'} />
       </View>
     </View>
   );
