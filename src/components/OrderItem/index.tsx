@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { TouchableRipple, useTheme } from 'react-native-paper';
+import { TouchableRipple } from 'react-native-paper';
 import Text from '../Text';
 import Next from '../../assets/icons/Next';
-import { Theme } from '../../styles/theme';
 import { createStyles } from './styles';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 interface OrderItemProps {
   id: string;
@@ -19,7 +19,7 @@ const OrderItem: React.FC<OrderItemProps> = ({
   updateDate = requestDate,
   status,
 }) => {
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
 
   return (

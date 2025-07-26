@@ -1,6 +1,6 @@
 // External Libraries
 import { Image } from 'react-native';
-import { Surface, useTheme } from 'react-native-paper';
+import { Surface } from 'react-native-paper';
 
 // Components
 import Text from '../Text';
@@ -15,16 +15,17 @@ import Arrow from '../../assets/icons/Arrow';
 
 // Styles
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
 import { useNavigation } from '@react-navigation/native';
+import { screenWidth } from '../../utils/dimensions';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const Header: React.FC<HeaderProps> = ({
   title,
   isBack,
   typeHeader = 'short',
 }) => {
-  const theme: Theme = useTheme();
-  const styles = createStyles(theme, typeHeader);
+  const theme = useAppTheme();
+  const styles = createStyles(theme, screenWidth, typeHeader);
   const navigation = useNavigation();
 
   const handleBackPress = () => {

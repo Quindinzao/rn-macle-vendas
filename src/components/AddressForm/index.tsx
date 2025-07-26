@@ -1,7 +1,6 @@
 // External libraries
 import { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
 // Components
 import Button from '../Button';
@@ -9,9 +8,9 @@ import TextField from '../TextField';
 
 // Styles
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
 import { layout } from '../../styles/globalStyle';
 import Text from '../Text';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const AddressForm: React.FC = () => {
   const [city, setCity] = useState('');
@@ -19,7 +18,7 @@ const AddressForm: React.FC = () => {
   const [neighborhood, setNeighborhood] = useState('');
   const [number, setNumber] = useState('');
   const [cep, setCEP] = useState('');
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>

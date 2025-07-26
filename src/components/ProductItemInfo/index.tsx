@@ -1,12 +1,12 @@
 import { View } from 'react-native';
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
-import { useTheme } from 'react-native-paper';
 import Text from '../Text';
+import { screenWidth } from '../../utils/dimensions';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const ProductItemInfo: React.FC = () => {
-  const theme: Theme = useTheme();
-  const styles = createStyles(theme);
+  const theme = useAppTheme();
+  const styles = createStyles(theme, screenWidth);
 
   return (
     <View style={styles.container}>

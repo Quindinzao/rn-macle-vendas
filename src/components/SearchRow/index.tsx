@@ -11,10 +11,12 @@ import Filter from '../../assets/icons/Filter';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { styles } from './styles';
+import { createStyles } from './styles';
+import { screenWidth } from '../../utils/dimensions';
 
 const SearchRow: React.FC = () => {
   const [search, setSearch] = useState('');
+  const styles = createStyles(screenWidth);
 
   return (
     <View style={layout.row}>

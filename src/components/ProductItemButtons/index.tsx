@@ -1,13 +1,12 @@
 import { TouchableOpacity, View } from 'react-native';
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
-import { useTheme } from 'react-native-paper';
 import Text from '../Text';
 import Subtract from '../../assets/icons/Subtract';
 import Plus from '../../assets/icons/Plus';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const ProductItemButtons: React.FC = () => {
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
 
   return (

@@ -1,11 +1,11 @@
 // External libraries
 import { MD3LightTheme as DefaultTheme } from 'react-native-paper';
-import { Platform } from 'react-native';
+
+// Utils
+import { isIOS } from '../utils/platform';
 
 // Styles
 import { colors } from './colors';
-
-const ios = Platform.OS === 'ios';
 
 export const theme = {
   colors: {
@@ -39,9 +39,9 @@ export const theme = {
     fs24: 24,
   },
   fontFamily: {
-    regular: ios ? 'Inter 28pt Regular' : 'Inter_28pt-Regular',
-    medium: ios ? 'Inter 28pt Medium' : 'Inter_28pt-Medium',
-    semiBold: ios ? 'Inter 28pt SemiBold' : 'Inter_28pt-SemiBold',
+    regular: isIOS ? 'Inter 28pt Regular' : 'Inter_28pt-Regular',
+    medium: isIOS ? 'Inter 28pt Medium' : 'Inter_28pt-Medium',
+    semiBold: isIOS ? 'Inter 28pt SemiBold' : 'Inter_28pt-SemiBold',
   },
 };
 

@@ -1,4 +1,4 @@
-import { BottomNavigation, useTheme } from 'react-native-paper';
+import { BottomNavigation } from 'react-native-paper';
 import Home from '../screens/Home';
 import ShoppingCart from '../screens/ShoppingCart';
 import Orders from '../screens/Orders';
@@ -12,6 +12,7 @@ import HistoryActive from '../assets/icons/HistoryActive';
 import HistoryInactive from '../assets/icons/HistoryInactive';
 import { StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useAppTheme } from '../hooks/useAppTheme';
 
 const HomeRoute = () => <Home />;
 const ShoppingCartRoute = () => <ShoppingCart />;
@@ -19,7 +20,7 @@ const OrdersRoute = () => <Orders />;
 
 const BottomTabs: React.FC = () => {
   const routeItem = useRoute();
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyle(theme);
 
   const [index, setIndex] = useState(() => {

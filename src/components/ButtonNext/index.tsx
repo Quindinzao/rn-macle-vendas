@@ -1,9 +1,9 @@
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 import Text from '../Text';
 import Button from '../Button';
-import { Theme } from '../../styles/theme';
 import { createStyles } from './styles';
+import { screenWidth } from '../../utils/dimensions';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 interface ButtonNextProps {
   onPress: () => void;
@@ -11,8 +11,8 @@ interface ButtonNextProps {
 }
 
 const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title }) => {
-  const theme: Theme = useTheme();
-  const styles = createStyles(theme);
+  const theme = useAppTheme();
+  const styles = createStyles(theme, screenWidth);
 
   return (
     <View style={styles.container}>

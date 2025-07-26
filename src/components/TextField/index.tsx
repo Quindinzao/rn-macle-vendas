@@ -1,12 +1,12 @@
 // External libraries
-import { TextInput, useTheme } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
 // Interfaces
 import { TextFieldProps } from '../../interfaces/TextFieldProps';
 
 // Styles
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const TextField: React.FC<TextFieldProps> = ({
   label,
@@ -16,7 +16,7 @@ const TextField: React.FC<TextFieldProps> = ({
   keyboardType = 'default',
   style,
 }) => {
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
   return (
     <TextInput

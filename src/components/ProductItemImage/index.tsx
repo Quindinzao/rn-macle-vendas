@@ -1,10 +1,9 @@
 import { Image, View } from 'react-native';
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
-import { useTheme } from 'react-native-paper';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const ProductItemImage: React.FC = () => {
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>

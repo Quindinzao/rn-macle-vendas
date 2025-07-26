@@ -1,9 +1,7 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Theme } from '../../styles/theme';
 
-const width = Dimensions.get('screen').width;
-
-export const createStyles = (theme: Theme) =>
+export const createStyles = (theme: Theme, width: number) =>
   StyleSheet.create({
     icon: {
       marginRight: theme.spacing.s08,

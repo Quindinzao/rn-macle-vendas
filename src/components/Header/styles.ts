@@ -1,12 +1,14 @@
 // External libraries
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // Styles
 import { Theme } from '../../styles/theme';
 
-const width = Dimensions.get('screen').width;
-
-export const createStyles = (theme: Theme, typeHeader: 'long' | 'short') =>
+export const createStyles = (
+  theme: Theme,
+  width: number,
+  typeHeader: 'long' | 'short',
+) =>
   StyleSheet.create({
     container: {
       width: width,

@@ -1,12 +1,12 @@
 // External libraries
-import { Text as RNPText, useTheme } from 'react-native-paper';
+import { Text as RNPText } from 'react-native-paper';
 
 // Interfaces
 import { TextProps } from '../../interfaces/TextProps';
 
 // Styles
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const Text: React.FC<TextProps> = ({
   children,
@@ -14,7 +14,7 @@ const Text: React.FC<TextProps> = ({
   numberOfLines = 1,
   style,
 }) => {
-  const theme = useTheme<Theme>();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
 
   return (

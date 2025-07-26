@@ -3,12 +3,12 @@ import ProductItemImage from '../ProductItemImage';
 import ProductItemInfo from '../ProductItemInfo';
 import { createStyle } from './styles';
 import ProductItemButtons from '../ProductItemButtons';
-import { Theme } from '../../styles/theme';
-import { useTheme } from 'react-native-paper';
+import { screenWidth } from '../../utils/dimensions';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const ProductItem: React.FC = () => {
-  const theme: Theme = useTheme();
-  const styles = createStyle(theme);
+  const theme = useAppTheme();
+  const styles = createStyle(theme, screenWidth);
   return (
     <>
       <View style={styles.container}>

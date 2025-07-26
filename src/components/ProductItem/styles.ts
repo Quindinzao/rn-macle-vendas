@@ -1,9 +1,7 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Theme } from '../../styles/theme';
 
-const width = Dimensions.get('screen').width;
-
-export const createStyle = (theme: Theme) =>
+export const createStyle = (theme: Theme, width: number) =>
   StyleSheet.create({
     container: {
       width: width - 24,

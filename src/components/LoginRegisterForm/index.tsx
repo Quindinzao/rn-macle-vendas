@@ -1,7 +1,6 @@
 // External libraries
 import { useState } from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'react-native-paper';
 
 // Components
 import Button from '../../components/Button';
@@ -9,12 +8,12 @@ import TextField from '../../components/TextField';
 
 // Styles
 import { createStyles } from './styles';
-import { Theme } from '../../styles/theme';
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 const LoginRegisterForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const theme: Theme = useTheme();
+  const theme = useAppTheme();
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
