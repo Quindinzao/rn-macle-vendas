@@ -1,16 +1,26 @@
+// External libraries
 import { View } from 'react-native';
+
+// Components
 import Text from '../Text';
 import Button from '../Button';
-import { createStyles } from './styles';
-import { screenWidth } from '../../utils/dimensions';
+
+// Hooks
 import { useAppTheme } from '../../hooks/useAppTheme';
+
+// Utils
+import { screenWidth } from '../../utils/dimensions';
+
+// Styles
+import { createStyles } from './styles';
 
 interface ButtonNextProps {
   onPress: () => void;
   title: string;
+  amount: string;
 }
 
-const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title }) => {
+const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title, amount }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme, screenWidth);
 
@@ -18,7 +28,7 @@ const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title }) => {
     <View style={styles.container}>
       <View style={styles.textContent}>
         <Text style={styles.text}>Total: </Text>
-        <Text type={'titleMedium'}>R$30,00</Text>
+        <Text type={'titleMedium'}>R${amount}</Text>
       </View>
       <Button onPress={onPress}>{title}</Button>
     </View>

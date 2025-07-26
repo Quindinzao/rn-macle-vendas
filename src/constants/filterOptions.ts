@@ -1,4 +1,4 @@
-export const ordination = [
+export const filterOptions = [
   { title: 'A-Z' },
   { title: 'Z-A' },
   { title: 'Mais barato' },

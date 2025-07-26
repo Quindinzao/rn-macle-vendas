@@ -1,21 +1,48 @@
-import { View } from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useRef, useEffect } from 'react';
+import { Animated } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
-import Text from '../Text';
-import { createStyles } from './styles';
-import { isIOS } from '../../utils/platform';
-import { screenWidth } from '../../utils/dimensions';
 import { useAppTheme } from '../../hooks/useAppTheme';
 import HeaderModal from '../HeaderModal';
+import { isIOS } from '../../utils/platform';
+import { screenHeight, screenWidth } from '../../utils/dimensions';
+import { createStyles } from './styles';
 
 interface ModalBaseProps {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
+  title: string;
 }
 
-const ModalBase: React.FC<ModalBaseProps> = ({ visible, setVisible }) => {
+const ModalBase: React.FC<ModalBaseProps> = ({
+  visible,
+  setVisible,
+  children,
+  title,
+}) => {
   const theme = useAppTheme();
   const styles = createStyles(theme, isIOS, screenWidth);
+
+  const translateY = useRef(new Animated.Value(screenHeight)).current;
+
   const hideModal = () => setVisible(false);
+
+  useEffect(() => {
+    if (visible) {
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(translateY, {
+        toValue: screenHeight,
+        duration: 300,
+        useNativeDriver: true,
+      }).start(() => translateY.setValue(screenHeight));
+    }
+  }, [visible]);
 
   return (
     <Portal>
@@ -24,10 +51,12 @@ const ModalBase: React.FC<ModalBaseProps> = ({ visible, setVisible }) => {
         onDismiss={hideModal}
         contentContainerStyle={styles.fullScreenModal}
       >
-        <View style={styles.innerContent}>
-          <HeaderModal title={'Hello World'} onClose={hideModal} />
-          <Text>Example Modal. Click outside this area to dismiss.</Text>
-        </View>
+        <Animated.View
+          style={[styles.innerContent, { transform: [{ translateY }] }]}
+        >
+          <HeaderModal title={title} onClose={hideModal} />
+          {children}
+        </Animated.View>
       </Modal>
     </Portal>
   );

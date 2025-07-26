@@ -37,7 +37,11 @@ const ShoppingCart: React.FC = () => {
       />
 
       <View style={layout.footer}>
-        <ButtonNext onPress={handleGoToDelivery} title={'Continuar'} />
+        <ButtonNext
+          onPress={handleGoToDelivery}
+          title={'Continuar'}
+          amount={'30,00'}
+        />
       </View>
     </>
   );

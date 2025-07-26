@@ -13,25 +13,59 @@ import { useAppTheme } from '../../hooks/useAppTheme';
 const LoginRegisterForm: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+  });
+
   const theme = useAppTheme();
   const styles = createStyles(theme);
+
+  const validate = () => {
+    const newErrors = {
+      username: username.trim() === '' ? 'Usuário é obrigatório.' : '',
+      password: password.trim() === '' ? 'Senha é obrigatória.' : '',
+    };
+
+    setErrors(newErrors);
+    return Object.values(newErrors).every(msg => msg === '');
+  };
+
+  const handleLogin = () => {
+    if (validate()) {
+      // Chamar API de login aqui
+      console.log('Login realizado com:', { username, password });
+    }
+  };
+
+  const handleRegister = () => {
+    if (validate()) {
+      console.log('Cadastro solicitado para:', { username, password });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TextField
         label={'Usuário'}
         value={username}
-        onChangeText={event => setUsername(event)}
+        onChangeText={setUsername}
+        error={!!errors.username}
+        errorMessage={errors.username}
       />
       <TextField
         label={'Senha'}
         value={password}
+        onChangeText={setPassword}
         secureTextEntry
-        onChangeText={event => setPassword(event)}
+        error={!!errors.password}
+        errorMessage={errors.password}
       />
-      <Button mode={'contained'} onPress={() => console.warn('Hello World')}>
+      <Button mode={'contained'} onPress={handleLogin}>
         Entrar
       </Button>
-      <Button mode={'text'} onPress={() => console.warn('Hello World')}>
+      <Button mode={'text'} onPress={handleRegister}>
         Cadastrar
       </Button>
     </View>

@@ -1,4 +1,7 @@
+// External libraries
 import { StyleSheet } from 'react-native';
+
+// Styles
 import { Theme } from '../../styles/theme';
 
 export const createStyles = (theme: Theme) =>
@@ -6,9 +9,10 @@ export const createStyles = (theme: Theme) =>
     container: {
       width: '100%',
     },
-    text: {
-      width: '100%',
-      textAlign: 'left',
-      marginBottom: theme.spacing.s04,
+    inputHalf: {
+      width: '48%',
+    },
+    textInput: {
+      marginTop: theme.spacing.s16,
     },
   });

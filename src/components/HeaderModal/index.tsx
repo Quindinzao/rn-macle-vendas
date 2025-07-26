@@ -8,6 +8,9 @@ import Button from '../Button';
 // Hooks
 import { useAppTheme } from '../../hooks/useAppTheme';
 
+// Utils
+import { isIOS } from '../../utils/platform';
+
 // Assets
 import CloseModal from '../../assets/icons/CloseModal';
 
@@ -21,7 +24,7 @@ interface HeaderModalProps {
 
 const HeaderModal: React.FC<HeaderModalProps> = ({ title, onClose }) => {
   const theme = useAppTheme();
-  const styles = createStyles(theme);
+  const styles = createStyles(theme, isIOS);
 
   return (
     <Surface style={styles.container} elevation={0}>

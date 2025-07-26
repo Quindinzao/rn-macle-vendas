@@ -32,6 +32,7 @@ export const layout = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   row: {
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',

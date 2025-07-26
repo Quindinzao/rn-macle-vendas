@@ -1,12 +1,14 @@
 // External libraries
-import { TextInput } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
+
+// Hooks
+import { useAppTheme } from '../../hooks/useAppTheme';
 
 // Interfaces
 import { TextFieldProps } from '../../interfaces/TextFieldProps';
 
 // Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const TextField: React.FC<TextFieldProps> = ({
   label,
@@ -15,21 +17,32 @@ const TextField: React.FC<TextFieldProps> = ({
   secureTextEntry = false,
   keyboardType = 'default',
   style,
+  error = false,
+  errorMessage,
 }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme);
+
   return (
-    <TextInput
-      label={label}
-      value={value}
-      onChangeText={onChangeText}
-      secureTextEntry={secureTextEntry}
-      keyboardType={keyboardType}
-      style={[styles.container, style]}
-      contentStyle={styles.content}
-      underlineColor="transparent"
-      mode="flat"
-    />
+    <>
+      {errorMessage && (
+        <HelperText type="error" visible={error}>
+          {errorMessage}
+        </HelperText>
+      )}
+      <TextInput
+        label={label}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        style={[styles.container, style]}
+        contentStyle={styles.content}
+        underlineColor="transparent"
+        mode="flat"
+        error={error}
+      />
+    </>
   );
 };
 

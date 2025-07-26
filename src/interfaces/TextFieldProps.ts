@@ -5,4 +5,6 @@ export interface TextFieldProps {
   secureTextEntry?: boolean;
   keyboardType?: 'default' | 'email-address' | 'numeric';
   style?: object;
+  error?: boolean;
+  errorMessage?: string;
 }

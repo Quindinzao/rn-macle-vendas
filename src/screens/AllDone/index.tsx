@@ -15,8 +15,8 @@ const AllDone: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RoutesProps>>();
 
   setTimeout(() => {
-    navigation.navigate('Tabs', { initialTab: 'orders' }); //remove the params
-  }, 3000);
+    navigation.navigate('Tabs', { initialTab: 'orders' });
+  }, 1500);
 
   return (
     <View style={layout.center}>

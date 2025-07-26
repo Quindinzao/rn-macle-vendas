@@ -26,7 +26,11 @@ const Pix: React.FC = () => {
         <View style={layout.content} />
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext onPress={handleGoToAllDone} title={'Finalizar'} />
+        <ButtonNext
+          onPress={handleGoToAllDone}
+          title={'Finalizar'}
+          amount={'30,00'}
+        />
       </View>
     </View>
   );

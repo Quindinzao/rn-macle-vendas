@@ -1,65 +1,111 @@
 // External libraries
 import { useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 // Components
 import Button from '../Button';
 import TextField from '../TextField';
 
+// Hooks
+import { useAppTheme } from '../../hooks/useAppTheme';
+
 // Styles
 import { createStyles } from './styles';
 import { layout } from '../../styles/globalStyle';
-import Text from '../Text';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const AddressForm: React.FC = () => {
   const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
+  const [state, setState] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
   const [number, setNumber] = useState('');
   const [cep, setCEP] = useState('');
+
+  const [errors, setErrors] = useState({
+    city: '',
+    state: '',
+    neighborhood: '',
+    number: '',
+    cep: '',
+  });
+
   const theme = useAppTheme();
   const styles = createStyles(theme);
+
+  const validate = () => {
+    const newErrors = {
+      city: city.trim() === '' ? 'Cidade é obrigatória.' : '',
+      state: state.trim() === '' ? 'Estado é obrigatório.' : '',
+      neighborhood: neighborhood.trim() === '' ? 'Bairro é obrigatório.' : '',
+      number: number.trim() === '' ? 'Número é obrigatório.' : '',
+      cep: cep.trim() === '' ? 'CEP é obrigatório.' : '',
+    };
+
+    setErrors(newErrors);
+
+    return Object.values(newErrors).every(msg => msg === '');
+  };
+
+  const handleSubmit = () => {
+    if (validate()) {
+      console.log('Dados enviados');
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text type={'titleSmall'} style={styles.text}>
-        Adicione seu endereço
-      </Text>
+    <ScrollView
+      style={styles.container}
+      keyboardShouldPersistTaps={'handled'}
+      showsVerticalScrollIndicator={false}
+    >
       <TextField
         label={'Cidade'}
         value={city}
-        onChangeText={event => setCity(event)}
+        onChangeText={setCity}
+        error={!!errors.city}
+        errorMessage={errors.city}
       />
       <TextField
         label={'Estado'}
-        value={street}
-        onChangeText={event => setStreet(event)}
+        value={state}
+        onChangeText={setState}
+        error={!!errors.state}
+        errorMessage={errors.state}
       />
       <TextField
         label={'Bairro'}
         value={neighborhood}
-        onChangeText={event => setNeighborhood(event)}
+        onChangeText={setNeighborhood}
+        error={!!errors.neighborhood}
+        errorMessage={errors.neighborhood}
       />
+
       <View style={layout.row}>
-        <TextField
-          label={'Número'}
-          value={number}
-          keyboardType={'numeric'}
-          onChangeText={event => setNumber(event)}
-          style={styles.inputHalf}
-        />
-        <TextField
-          label={'CEP'}
-          value={cep}
-          keyboardType={'numeric'}
-          onChangeText={event => setCEP(event)}
-          style={styles.inputHalf}
-        />
+        <View style={styles.inputHalf}>
+          <TextField
+            label={'Número'}
+            value={number}
+            onChangeText={setNumber}
+            keyboardType={'numeric'}
+            error={!!errors.number}
+            errorMessage={errors.number}
+          />
+        </View>
+        <View style={styles.inputHalf}>
+          <TextField
+            label={'CEP'}
+            value={cep}
+            onChangeText={setCEP}
+            keyboardType={'numeric'}
+            error={!!errors.cep}
+            errorMessage={errors.cep}
+          />
+        </View>
       </View>
-      <Button mode={'contained'} onPress={() => console.warn('Hello World')}>
-        Entrar
+
+      <Button mode={'contained'} onPress={handleSubmit}>
+        Adicionar
       </Button>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -16,6 +16,10 @@ import { savedCard } from '../../constants/savedCard';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import Button from '../../components/Button';
+import { useState } from 'react';
+import ModalBase from '../../components/ModalBase';
+import CardForm from '../../components/CardForm';
 
 const Address: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
@@ -25,20 +29,32 @@ const Address: React.FC = () => {
       routes: [{ name: 'AllDone' }],
     });
   };
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
   return (
     <View style={layout.container}>
       <ScrollView>
         <Header title={'Cartão'} isBack />
         <View style={layout.content}>
-          <RadioForm
-            title={'Cartões salvos'}
-            items={savedCard}
-            buttonText={'Adicionar cartão'}
-          />
+          <RadioForm title={'Cartões salvos'} items={savedCard} />
+          <Button mode={'text'} onPress={showModal}>
+            Adicionar cartão
+          </Button>
         </View>
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext onPress={handleGoToAllDone} title={'Finalizar'} />
+        <ButtonNext
+          onPress={handleGoToAllDone}
+          title={'Finalizar'}
+          amount={'30,00'}
+        />
+        <ModalBase
+          title={'Adicione cartão'}
+          visible={visible}
+          setVisible={setVisible}
+        >
+          <CardForm />
+        </ModalBase>
       </View>
     </View>
   );

@@ -7,6 +7,7 @@ import { Theme } from '../../styles/theme';
 export const createStyles = (theme: Theme, type: 'text' | 'image') =>
   StyleSheet.create({
     container: {
+      width: type === 'text' ? '100%' : 54,
       height: 54,
       borderRadius: theme.roundness,
       marginBottom: theme.spacing.s12,

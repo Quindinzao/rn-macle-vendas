@@ -34,7 +34,11 @@ const Delivery: React.FC = () => {
         </View>
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext onPress={handleGoToAddress} title={'Continuar'} />
+        <ButtonNext
+          onPress={handleGoToAddress}
+          title={'Continuar'}
+          amount={'30,00'}
+        />
       </View>
     </View>
   );

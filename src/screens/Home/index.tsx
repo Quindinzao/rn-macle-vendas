@@ -8,6 +8,9 @@ import ProductItem from '../../components/ProductItem';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import ModalBase from '../../components/ModalBase';
+import { useState } from 'react';
+import FilterForm from '../../components/FilterForm';
 
 const mockData = [
   { id: '1', name: 'Produto 1' },
@@ -18,21 +21,33 @@ const mockData = [
 ];
 
 const Home: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  const showModal = () => setVisible(true);
+
   return (
-    <FlatList
-      data={mockData}
-      keyExtractor={item => item.id}
-      renderItem={() => <ProductItem />}
-      ListHeaderComponent={
-        <View style={layout.headerContainer}>
-          <Header title={'Produtos'} />
-          <SearchRow />
-        </View>
-      }
-      showsVerticalScrollIndicator={false}
-      style={layout.flatListContainer}
-      contentContainerStyle={layout.flatListContent}
-    />
+    <>
+      <FlatList
+        data={mockData}
+        keyExtractor={item => item.id}
+        renderItem={() => <ProductItem />}
+        ListHeaderComponent={
+          <View style={layout.headerContainer}>
+            <Header title={'Produtos'} />
+            <SearchRow onPress={showModal} />
+          </View>
+        }
+        showsVerticalScrollIndicator={false}
+        style={layout.flatListContainer}
+        contentContainerStyle={layout.flatListContent}
+      />
+      <ModalBase
+        title={'Filtros e ordenação'}
+        visible={visible}
+        setVisible={setVisible}
+      >
+        <FilterForm />
+      </ModalBase>
+    </>
   );
 };
 

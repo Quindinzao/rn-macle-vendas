@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 // Styles
 import { Theme } from '../../styles/theme';
 
-export const createStyles = (theme: Theme) =>
+export const createStyles = (theme: Theme, isIOS: boolean) =>
   StyleSheet.create({
     container: {
       position: 'relative',
@@ -14,7 +14,7 @@ export const createStyles = (theme: Theme) =>
     },
     close: {
       position: 'absolute',
-      right: 0,
-      top: -theme.spacing.s16,
+      right: isIOS ? -theme.spacing.s04 : -theme.spacing.s16,
+      top: isIOS ? -theme.spacing.s16 : -theme.spacing.s12,
     },
   });

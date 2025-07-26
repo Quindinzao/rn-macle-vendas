@@ -34,7 +34,11 @@ const PaymentMethod: React.FC = () => {
         </View>
       </ScrollView>
       <View style={layout.footer}>
-        <ButtonNext onPress={handleGoToCard} title={'Continuar'} />
+        <ButtonNext
+          onPress={handleGoToCard}
+          title={'Continuar'}
+          amount={'30,00'}
+        />
       </View>
     </View>
   );

@@ -1,12 +1,14 @@
 // External libraries
 import { Button as RNPButton } from 'react-native-paper';
 
+// Hooks
+import { useAppTheme } from '../../hooks/useAppTheme';
+
 // Interfaces
 import { ButtonProps } from '../../interfaces/ButtonProps';
 
 // Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const Button: React.FC<ButtonProps> = ({
   children,
