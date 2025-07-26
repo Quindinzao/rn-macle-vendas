@@ -5,6 +5,7 @@ import { createStyles } from './styles';
 import { isIOS } from '../../utils/platform';
 import { screenWidth } from '../../utils/dimensions';
 import { useAppTheme } from '../../hooks/useAppTheme';
+import HeaderModal from '../HeaderModal';
 
 interface ModalBaseProps {
   visible: boolean;
@@ -24,6 +25,7 @@ const ModalBase: React.FC<ModalBaseProps> = ({ visible, setVisible }) => {
         contentContainerStyle={styles.fullScreenModal}
       >
         <View style={styles.innerContent}>
+          <HeaderModal title={'Hello World'} onClose={hideModal} />
           <Text>Example Modal. Click outside this area to dismiss.</Text>
         </View>
       </Modal>
