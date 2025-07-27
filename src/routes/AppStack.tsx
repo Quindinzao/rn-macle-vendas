@@ -1,12 +1,18 @@
-import React from 'react';
+// External libraries
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BottomTabs from './BottomTabs';
+
+// Screens
 import Delivery from '../screens/Delivery';
-import { RoutesProps } from '../interfaces/RoutesProps';
 import Address from '../screens/Address';
 import PaymentMethod from '../screens/PaymentMethod';
 import Card from '../screens/Card';
 import AllDone from '../screens/AllDone';
+
+// Routes
+import BottomTabs from './BottomTabs';
+
+// Interfaces
+import { RoutesProps } from '../interfaces/RoutesProps';
 
 const { Navigator, Screen } = createNativeStackNavigator<RoutesProps>();
 

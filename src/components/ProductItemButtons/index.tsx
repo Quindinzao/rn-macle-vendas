@@ -1,9 +1,18 @@
+// External libraries
 import { TouchableOpacity, View } from 'react-native';
-import { createStyles } from './styles';
+
+// Components
 import Text from '../Text';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Assets
 import Subtract from '../../assets/icons/Subtract';
 import Plus from '../../assets/icons/Plus';
-import { useAppTheme } from '../../hooks/useAppTheme';
+
+// Styles
+import { createStyles } from './styles';
 
 const ProductItemButtons: React.FC = () => {
   const theme = useAppTheme();

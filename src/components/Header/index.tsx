@@ -9,6 +9,9 @@ import Button from '../Button';
 // Interfaces
 import { HeaderProps } from '../../interfaces/HeaderProps';
 
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
 // Assets
 import Logo from '../../assets/icons/Logo';
 import Arrow from '../../assets/icons/Arrow';
@@ -17,7 +20,6 @@ import Arrow from '../../assets/icons/Arrow';
 import { createStyles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { screenWidth } from '../../utils/dimensions';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const Header: React.FC<HeaderProps> = ({
   title,

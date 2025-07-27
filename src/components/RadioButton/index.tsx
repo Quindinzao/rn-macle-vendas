@@ -6,14 +6,18 @@ import { RadioButton as RNPRadioButton } from 'react-native-paper';
 // Components
 import Text from '../Text';
 
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Utils
+import { screenWidth } from '../../utils/dimensions';
+
 // Interfaces
 import { RadioButtonProps } from '../../interfaces/RadioButtonProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
 import { createStyles } from './styles';
-import { screenWidth } from '../../utils/dimensions';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const RadioButton: React.FC<RadioButtonProps> = ({ items }) => {
   const [value, setValue] = useState('');

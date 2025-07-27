@@ -2,7 +2,7 @@
 import { Button as RNPButton } from 'react-native-paper';
 
 // Hooks
-import { useAppTheme } from '../../hooks/useAppTheme';
+import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
 import { ButtonProps } from '../../interfaces/ButtonProps';

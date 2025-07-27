@@ -1,18 +1,27 @@
-import { BottomNavigation } from 'react-native-paper';
-import Home from '../screens/Home';
-import ShoppingCart from '../screens/ShoppingCart';
-import Orders from '../screens/Orders';
-import { Theme } from '../styles/theme';
+// External libraries
 import { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { BottomNavigation } from 'react-native-paper';
+
+// Screens
+import Home from '../screens/Home';
+import Orders from '../screens/Orders';
+import ShoppingCart from '../screens/ShoppingCart';
+
+// Hooks
+import { useAppTheme } from '../hooks/common/useAppTheme';
+
+// Assets
 import HomeActive from '../assets/icons/HomeActive';
 import HomeInactive from '../assets/icons/HomeInactive';
 import ShoppingCartActive from '../assets/icons/ShoppingCartActive';
 import ShoppingCartInactive from '../assets/icons/ShoppingCartInactive';
 import HistoryActive from '../assets/icons/HistoryActive';
 import HistoryInactive from '../assets/icons/HistoryInactive';
-import { StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { useAppTheme } from '../hooks/useAppTheme';
+
+// Styles
+import { Theme } from '../styles/theme';
 
 const HomeRoute = () => <Home />;
 const ShoppingCartRoute = () => <ShoppingCart />;

@@ -1,6 +1,11 @@
+// External libraries
 import { Image, View } from 'react-native';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const ProductItemImage: React.FC = () => {
   const theme = useAppTheme();

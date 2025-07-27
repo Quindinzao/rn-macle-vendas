@@ -7,7 +7,7 @@ import Button from '../Button';
 import TextField from '../TextField';
 
 // Hooks
-import { useAppTheme } from '../../hooks/useAppTheme';
+import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Styles
 import { createStyles } from './styles';

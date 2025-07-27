@@ -1,12 +1,14 @@
 // External libraries
 import { Text as RNPText } from 'react-native-paper';
 
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
 // Interfaces
 import { TextProps } from '../../interfaces/TextProps';
 
 // Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const Text: React.FC<TextProps> = ({
   children,

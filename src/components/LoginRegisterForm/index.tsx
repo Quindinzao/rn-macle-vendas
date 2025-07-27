@@ -6,11 +6,20 @@ import { View } from 'react-native';
 import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 
+// Contexts
+import { useContextAuth } from '../../contexts/AuthContext';
+
+// Services
+import useUserRequests from '../../hooks/services/useUserRequests';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
 // Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 const LoginRegisterForm: React.FC = () => {
+  const { handleSignIn } = useContextAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +30,8 @@ const LoginRegisterForm: React.FC = () => {
 
   const theme = useAppTheme();
   const styles = createStyles(theme);
+
+  const { userRegister } = useUserRequests();
 
   const validate = () => {
     const newErrors = {
@@ -34,14 +45,14 @@ const LoginRegisterForm: React.FC = () => {
 
   const handleLogin = () => {
     if (validate()) {
-      // Chamar API de login aqui
+      handleSignIn(username, password);
       console.log('Login realizado com:', { username, password });
     }
   };
 
   const handleRegister = () => {
     if (validate()) {
-      console.log('Cadastro solicitado para:', { username, password });
+      userRegister({ username, password });
     }
   };
 

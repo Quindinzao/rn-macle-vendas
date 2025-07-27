@@ -1,8 +1,17 @@
+// External libraries
 import { View } from 'react-native';
-import { createStyles } from './styles';
+
+// Components
 import Text from '../Text';
+
+// Utils
 import { screenWidth } from '../../utils/dimensions';
-import { useAppTheme } from '../../hooks/useAppTheme';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Styles
+import { createStyles } from './styles';
 
 const ProductItemInfo: React.FC = () => {
   const theme = useAppTheme();

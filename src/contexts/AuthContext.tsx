@@ -1,80 +1,93 @@
-// import React, { createContext, useState, useEffect, ReactNode } from 'react';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+/* eslint-disable react-hooks/exhaustive-deps */
+// External libraries
+import { createContext, useState, useEffect, useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// export interface AuthData {
-//   token: string;
-//   exp: number;
-// }
+// Hooks
+import useAuth from '../hooks/services/useAuth';
 
-// interface AuthContextData {
-//   authData?: AuthData;
-//   handleSignIn: (email: string, password: string) => Promise<void>;
-//   handleSignOut: () => Promise<void>;
-//   isLoading: boolean;
-// }
+// Interfaces
+import {
+  AuthContextData,
+  AuthData,
+  AuthProviderProps,
+} from '../interfaces/AuthContext';
 
-// export const AuthContext = createContext<AuthContextData>(
-//   {} as AuthContextData,
-// );
+export const AuthContext = createContext<AuthContextData>(
+  {} as AuthContextData,
+);
 
-// interface AuthProviderProps {
-//   children?: ReactNode;
-// }
+const AUTH_KEY = '@app/auth';
 
-// const AUTH_KEY = '@app/auth';
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [authData, setAuthData] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
+  const { userAuthentication } = useAuth();
 
-// export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-//   const [authData, setAuthData] = useState<any>();
-//   const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    loadFromStorage();
+  }, []);
 
-//   useEffect(() => {
-//     loadFromStorage();
-//   }, []);
+  const isTokenExpired = (exp: number): boolean => {
+    const now = Math.floor(Date.now() / 1000);
+    return exp < now;
+  };
 
-//   const loadFromStorage = async () => {
-//     const auth = await AsyncStorage.getItem(AUTH_KEY);
-//     if (auth) {
-//       setAuthData(JSON.parse(auth) as AuthData);
-//     }
+  const loadFromStorage = async () => {
+    const auth = await AsyncStorage.getItem(AUTH_KEY);
+    if (auth) {
+      const parsedAuth = JSON.parse(auth) as AuthData;
 
-//     setTimeout(() => {
-//       setIsLoading(false);
-//     }, 1000);
-//   };
+      if (!isTokenExpired(parsedAuth.exp)) {
+        setAuthData(parsedAuth);
+      } else {
+        await AsyncStorage.removeItem(AUTH_KEY); // limpa token expirado
+      }
+      setAuthData(JSON.parse(auth) as AuthData);
+    }
 
-//   const handleSignIn = async (email: string, password: string) => {
-//     setIsLoading(true);
-//     try {
-//       const result = await signIn({ email, password });
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  };
 
-//       if (!result?.token) {
-//         throw new Error('Invalid response from authentication');
-//       }
+  const handleSignIn = async (username: string, password: string) => {
+    setIsLoading(true);
+    try {
+      const result = await userAuthentication({ username, password });
 
-//       const auth: AuthData = {
-//         token: result.token,
-//         exp: result.exp,
-//       };
+      if (!result?.token) {
+        throw new Error('Invalid response from authentication');
+      }
 
-//       setAuthData(auth);
-//       await AsyncStorage.setItem(AUTH_KEY, JSON.stringify(auth));
-//     } catch (error: any) {
-//       console.log(':/', 'Failed to sign in.');
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
+      const auth: AuthData = {
+        token: result.token,
+        exp: result.exp,
+      };
 
-//   const handleSignOut = async (): Promise<void> => {
-//     setAuthData(undefined);
-//     await AsyncStorage.removeItem(AUTH_KEY);
-//   };
+      setAuthData(auth);
+      await AsyncStorage.setItem(AUTH_KEY, JSON.stringify(auth));
+    } catch (error: any) {
+      console.log(':/', 'Failed to sign in.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-//   return (
-//     <AuthContext.Provider
-//       value={{ authData, handleSignIn, handleSignOut, isLoading }}
-//     >
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  const handleSignOut = async (): Promise<void> => {
+    setAuthData(undefined);
+    await AsyncStorage.removeItem(AUTH_KEY);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ authData, handleSignIn, handleSignOut, isLoading }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useContextAuth = () => {
+  return useContext(AuthContext);
+};

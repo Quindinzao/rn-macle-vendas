@@ -6,7 +6,7 @@ import Text from '../Text';
 import Button from '../Button';
 
 // Hooks
-import { useAppTheme } from '../../hooks/useAppTheme';
+import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Utils
 import { isIOS } from '../../utils/platform';

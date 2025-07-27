@@ -1,8 +1,15 @@
+// External libraries
 import { View } from 'react-native';
+
+// Components
 import Text from '../Text';
 import RadioButton from '../RadioButton';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 interface RadioFormProps {
   title: string;

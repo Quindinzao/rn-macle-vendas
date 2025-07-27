@@ -1,9 +1,10 @@
 // External libraries
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Screens
 import LoginRegister from '../screens/LoginRegister';
+
+// Interfaces
 import { RoutesProps } from '../interfaces/RoutesProps';
 
 const { Navigator, Screen } = createNativeStackNavigator<RoutesProps>();

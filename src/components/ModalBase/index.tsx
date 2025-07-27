@@ -1,11 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// External libraries
 import { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
-import { useAppTheme } from '../../hooks/useAppTheme';
+
+// Components
 import HeaderModal from '../HeaderModal';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Utils
 import { isIOS } from '../../utils/platform';
 import { screenHeight, screenWidth } from '../../utils/dimensions';
+
+// Styles
 import { createStyles } from './styles';
 
 interface ModalBaseProps {

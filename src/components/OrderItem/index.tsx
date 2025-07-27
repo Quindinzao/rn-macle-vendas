@@ -1,10 +1,16 @@
-import React from 'react';
+// External libraries
 import { View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
+
+// Components
 import Text from '../Text';
 import Next from '../../assets/icons/Next';
+
+// Hooks
+import { useAppTheme } from '../../hooks/common/useAppTheme';
+
+// Styles
 import { createStyles } from './styles';
-import { useAppTheme } from '../../hooks/useAppTheme';
 
 interface OrderItemProps {
   id: string;
