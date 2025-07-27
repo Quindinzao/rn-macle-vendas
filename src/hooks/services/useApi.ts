@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // External libraries
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 // Contexts
 import { useSnackbar } from '../../contexts/SnackbarContext';
@@ -14,7 +13,7 @@ export const useApi = () => {
 
   useEffect(() => {
     setupInterceptors(api, showSnackbar);
-  }, []);
+  }, [showSnackbar]);
 
-  return { api };
+  return useMemo(() => ({ api }), []);
 };

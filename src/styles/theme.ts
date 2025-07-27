@@ -2,7 +2,7 @@
 import { MD3LightTheme as DefaultTheme } from 'react-native-paper';
 
 // Utils
-import { isIOS } from '../utils/platform';
+import { isIOS } from '../utils/helpers/platform';
 
 // Styles
 import { colors } from './colors';

@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import Text from '../Text';
 
 // Utils
-import { screenWidth } from '../../utils/dimensions';
+import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';

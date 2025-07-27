@@ -7,7 +7,7 @@ import TextField from '../TextField';
 import Button from '../Button';
 
 // Utils
-import { screenWidth } from '../../utils/dimensions';
+import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Assets
 import Filter from '../../assets/icons/Filter';

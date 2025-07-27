@@ -1,16 +1,16 @@
 // External libraries
+import { useState } from 'react';
 import { FlatList, View } from 'react-native';
 
 // Components
 import Header from '../../components/Header';
 import SearchRow from '../../components/SearchRow';
 import ProductItem from '../../components/ProductItem';
+import ModalBase from '../../components/ModalBase';
+import FilterForm from '../../components/FilterForm';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import ModalBase from '../../components/ModalBase';
-import { useState } from 'react';
-import FilterForm from '../../components/FilterForm';
 
 const mockData = [
   { id: '1', name: 'Produto 1' },

@@ -9,7 +9,7 @@ import Button from '../Button';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Utils
-import { isIOS } from '../../utils/platform';
+import { isIOS } from '../../utils/helpers/platform';
 
 // Assets
 import CloseModal from '../../assets/icons/CloseModal';

@@ -9,7 +9,7 @@ import Button from '../Button';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Utils
-import { screenWidth } from '../../utils/dimensions';
+import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Styles
 import { createStyles } from './styles';

@@ -1,5 +1,5 @@
 // External libraries
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 
 // Components
@@ -20,63 +20,69 @@ import { createStyles } from './styles';
 
 const LoginRegisterForm: React.FC = () => {
   const { handleSignIn } = useContextAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { userRegister } = useUserRequests();
 
-  const [errors, setErrors] = useState({
+  const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
+  const [errors, setErrors] = useState({ username: '', password: '' });
 
   const theme = useAppTheme();
   const styles = createStyles(theme);
 
-  const { userRegister } = useUserRequests();
+  const handleInputChange = useCallback(
+    (field: 'username' | 'password', value: string) => {
+      setCredentials(prev => ({ ...prev, [field]: value }));
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    },
+    [],
+  );
 
-  const validate = () => {
+  const validateForm = useCallback(() => {
+    const { username, password } = credentials;
+
     const newErrors = {
-      username: username.trim() === '' ? 'Usuário é obrigatório.' : '',
-      password: password.trim() === '' ? 'Senha é obrigatória.' : '',
+      username: username.trim() ? '' : 'Usuário é obrigatório.',
+      password: password.trim() ? '' : 'Senha é obrigatória.',
     };
 
     setErrors(newErrors);
-    return Object.values(newErrors).every(msg => msg === '');
-  };
+    return Object.values(newErrors).every(error => error === '');
+  }, [credentials]);
 
-  const handleLogin = () => {
-    if (validate()) {
-      handleSignIn(username, password);
-      console.log('Login realizado com:', { username, password });
-    }
-  };
+  const handleLogin = useCallback(() => {
+    if (!validateForm()) return;
+    handleSignIn(credentials.username, credentials.password);
+  }, [credentials, validateForm, handleSignIn]);
 
-  const handleRegister = () => {
-    if (validate()) {
-      userRegister({ username, password });
-    }
-  };
+  const handleRegister = useCallback(() => {
+    if (!validateForm()) return;
+    userRegister({ ...credentials });
+  }, [credentials, validateForm, userRegister]);
 
   return (
     <View style={styles.container}>
       <TextField
-        label={'Usuário'}
-        value={username}
-        onChangeText={setUsername}
+        label="Usuário"
+        value={credentials.username}
+        onChangeText={value => handleInputChange('username', value)}
         error={!!errors.username}
         errorMessage={errors.username}
       />
       <TextField
-        label={'Senha'}
-        value={password}
-        onChangeText={setPassword}
+        label="Senha"
+        value={credentials.password}
+        onChangeText={value => handleInputChange('password', value)}
         secureTextEntry
         error={!!errors.password}
         errorMessage={errors.password}
       />
-      <Button mode={'contained'} onPress={handleLogin}>
+
+      <Button mode="contained" onPress={handleLogin}>
         Entrar
       </Button>
-      <Button mode={'text'} onPress={handleRegister}>
+      <Button mode="text" onPress={handleRegister}>
         Cadastrar
       </Button>
     </View>

@@ -25,6 +25,11 @@ export const createStyles = (
       top: theme.spacing.s48,
       left: theme.spacing.s04,
     },
+    signOut: {
+      position: 'absolute',
+      top: theme.spacing.s48,
+      right: theme.spacing.s04,
+    },
     logo: {
       position: 'absolute',
       top: theme.spacing.s64,

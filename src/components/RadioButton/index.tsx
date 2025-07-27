@@ -10,7 +10,7 @@ import Text from '../Text';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Utils
-import { screenWidth } from '../../utils/dimensions';
+import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Interfaces
 import { RadioButtonProps } from '../../interfaces/RadioButtonProps';

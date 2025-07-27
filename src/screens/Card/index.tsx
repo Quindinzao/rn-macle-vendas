@@ -1,4 +1,5 @@
 // External libraries
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -7,6 +8,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Header from '../../components/Header';
 import RadioForm from '../../components/RadioForm';
 import ButtonNext from '../../components/ButtonNext';
+import ModalBase from '../../components/ModalBase';
+import CardForm from '../../components/CardForm';
+import Button from '../../components/Button';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
@@ -16,10 +20,6 @@ import { savedCard } from '../../constants/savedCard';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import Button from '../../components/Button';
-import { useState } from 'react';
-import ModalBase from '../../components/ModalBase';
-import CardForm from '../../components/CardForm';
 
 const Address: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();

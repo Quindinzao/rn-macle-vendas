@@ -4,14 +4,14 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Hooks
-import useAuth from '../hooks/services/useAuth';
+import useUserRequests from '../hooks/services/useUserRequests';
 
 // Interfaces
 import {
   AuthContextData,
   AuthData,
   AuthProviderProps,
-} from '../interfaces/AuthContext';
+} from '../interfaces/AuthContextProps';
 
 export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData,
@@ -22,7 +22,7 @@ const AUTH_KEY = '@app/auth';
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
-  const { userAuthentication } = useAuth();
+  const { userAuthentication } = useUserRequests();
 
   useEffect(() => {
     loadFromStorage();

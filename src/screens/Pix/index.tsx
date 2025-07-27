@@ -1,15 +1,17 @@
 // External libraries
 import { ScrollView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Components
 import Header from '../../components/Header';
 import ButtonNext from '../../components/ButtonNext';
 
+// Routes
+import { RoutesProps } from '../../interfaces/RoutesProps';
+
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RoutesProps } from '../../interfaces/RoutesProps';
 
 const Pix: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
