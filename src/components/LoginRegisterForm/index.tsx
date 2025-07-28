@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import TextField from '../../components/TextField';
 
 // Contexts
-import { useContextAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Services
 import useUserRequests from '../../hooks/services/useUserRequests';
@@ -19,7 +19,7 @@ import { useAppTheme } from '../../hooks/common/useAppTheme';
 import { createStyles } from './styles';
 
 const LoginRegisterForm: React.FC = () => {
-  const { handleSignIn } = useContextAuth();
+  const { handleSignIn } = useAuth();
   const { userRegister } = useUserRequests();
 
   const [credentials, setCredentials] = useState({

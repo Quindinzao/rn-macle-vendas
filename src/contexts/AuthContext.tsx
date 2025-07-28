@@ -1,7 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// External libraries
-import { createContext, useState, useEffect, useContext } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { jwtDecode } from 'jwt-decode';
 
 // Hooks
 import useUserRequests from '../hooks/services/useUserRequests';
@@ -13,81 +18,108 @@ import {
   AuthProviderProps,
 } from '../interfaces/AuthContextProps';
 
-export const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData,
-);
+// Constants
+import { AUTH_KEY } from '../constants/authKey';
 
-const AUTH_KEY = '@app/auth';
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+
+// Função para decodificar JWT e obter o campo exp
+const decodeToken = (token: string) => {
+  try {
+    const decoded = jwtDecode<{ exp: number }>(token);
+    return decoded.exp;
+  } catch (error) {
+    console.error('Erro ao decodificar o token JWT:', error);
+    return null;
+  }
+};
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [authData, setAuthData] = useState<any>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [authData, setAuthData] = useState<AuthData | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { userAuthentication } = useUserRequests();
-
-  useEffect(() => {
-    loadFromStorage();
-  }, []);
 
   const isTokenExpired = (exp: number): boolean => {
     const now = Math.floor(Date.now() / 1000);
     return exp < now;
   };
 
-  const loadFromStorage = async () => {
-    const auth = await AsyncStorage.getItem(AUTH_KEY);
-    if (auth) {
-      const parsedAuth = JSON.parse(auth) as AuthData;
+  const loadFromStorage = useCallback(async () => {
+    try {
+      const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
 
-      if (!isTokenExpired(parsedAuth.exp)) {
-        setAuthData(parsedAuth);
-      } else {
-        await AsyncStorage.removeItem(AUTH_KEY); // limpa token expirado
+      if (storedAuth) {
+        const parsed = JSON.parse(storedAuth) as AuthData;
+
+        if (!isTokenExpired(parsed.exp)) {
+          setAuthData(parsed);
+        } else {
+          await AsyncStorage.removeItem(AUTH_KEY);
+        }
       }
-      setAuthData(JSON.parse(auth) as AuthData);
-    }
-
-    setTimeout(() => {
+    } catch (error) {
+      console.log('[Auth] Failed to load auth data from storage:', error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  };
+    }
+  }, []);
+
+  useEffect(() => {
+    loadFromStorage();
+  }, [loadFromStorage]);
 
   const handleSignIn = async (username: string, password: string) => {
     setIsLoading(true);
     try {
       const result = await userAuthentication({ username, password });
+      console.log('Login result:', result);
 
       if (!result?.token) {
-        throw new Error('Invalid response from authentication');
+        throw new Error('[Auth] Token não encontrado na resposta');
+      }
+
+      const exp = decodeToken(result.token); // extrair exp do token JWT
+
+      if (!exp) {
+        throw new Error('[Auth] Expiração do token inválida');
       }
 
       const auth: AuthData = {
         token: result.token,
-        exp: result.exp,
+        exp,
       };
 
       setAuthData(auth);
       await AsyncStorage.setItem(AUTH_KEY, JSON.stringify(auth));
-    } catch (error: any) {
-      console.log(':/', 'Failed to sign in.');
+    } catch (error) {
+      console.log('[Auth] Failed to sign in:', error);
+      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSignOut = async (): Promise<void> => {
-    setAuthData(undefined);
-    await AsyncStorage.removeItem(AUTH_KEY);
+  const handleSignOut = async () => {
+    try {
+      await AsyncStorage.removeItem(AUTH_KEY);
+      setAuthData(undefined);
+    } catch (error) {
+      console.log('[Auth] Failed to sign out:', error);
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ authData, handleSignIn, handleSignOut, isLoading }}
+      value={{
+        authData,
+        handleSignIn,
+        handleSignOut,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useContextAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

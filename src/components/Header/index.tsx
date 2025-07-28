@@ -12,7 +12,7 @@ import { HeaderProps } from '../../interfaces/HeaderProps';
 
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
-import { useContextAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Utils
 import { screenWidth } from '../../utils/helpers/dimensions';
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
   const theme = useAppTheme();
   const styles = createStyles(theme, screenWidth, typeHeader);
   const navigation = useNavigation();
-  const { handleSignOut } = useContextAuth();
+  const { handleSignOut } = useAuth();
 
   const confirmLogout = () => {
     Alert.alert(

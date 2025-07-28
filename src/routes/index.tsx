@@ -6,10 +6,10 @@ import AppStack from './AppStack';
 import AuthStack from './AuthStack';
 
 // Contexts
-import { useContextAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Routes: React.FC = () => {
-  const { authData } = useContextAuth();
+  const { authData } = useAuth();
 
   return (
     <NavigationContainer>
