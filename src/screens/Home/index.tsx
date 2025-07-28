@@ -15,6 +15,7 @@ import useProductsRequests from '../../hooks/services/useProductsRequest';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import EmptyList from '../../components/EmptyList';
 
 const Home: React.FC = () => {
   const [visible, setVisible] = useState(false);
@@ -67,7 +68,10 @@ const Home: React.FC = () => {
           </View>
         }
         ListFooterComponent={
-          loading ? <ActivityIndicator size="large" /> : null
+          loading ? <ActivityIndicator size={'large'} /> : null
+        }
+        ListEmptyComponent={
+          <EmptyList message={'Lista vazia. Tente novamente mais tarde.'} />
         }
         onEndReached={fetchProducts}
         onEndReachedThreshold={0.1}

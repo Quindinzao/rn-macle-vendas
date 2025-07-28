@@ -13,6 +13,7 @@ import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
+import EmptyList from '../../components/EmptyList';
 
 const mockData = [
   { id: '1', name: 'Produto 1' },
@@ -31,6 +32,9 @@ const ShoppingCart: React.FC = () => {
         keyExtractor={item => item.id}
         renderItem={() => <ProductItem />}
         ListHeaderComponent={<Header title={'Carrinho'} />}
+        ListEmptyComponent={
+          <EmptyList message={'Lista vazia. Adicione itens ao seu carrinho.'} />
+        }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={layout.flatListContent}
         style={layout.flatListContainer}
