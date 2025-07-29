@@ -27,6 +27,7 @@ const AddressForm: React.FC = () => {
     city: '',
     uf: '',
     neighborhood: '',
+    street: '',
     number: '',
     cep: '',
   });
@@ -82,6 +83,7 @@ const AddressForm: React.FC = () => {
       {renderInput('Cidade', 'city')}
       {renderInput('Estado', 'uf')}
       {renderInput('Bairro', 'neighborhood')}
+      {renderInput('Rua', 'street')}
 
       <View style={layout.row}>
         <View style={styles.inputHalf}>

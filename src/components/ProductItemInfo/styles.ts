@@ -10,6 +10,10 @@ export const createStyles = (theme: Theme, width: number) =>
     },
     description: {
       width: width - 232,
+      height: 36,
       marginVertical: theme.spacing.s08,
+    },
+    text: {
+      width: width - 232,
     },
   });

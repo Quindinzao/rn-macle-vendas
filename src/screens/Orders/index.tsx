@@ -26,7 +26,7 @@ const Orders: React.FC = () => {
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Transporte'} />
+        <Header title={'Pedidos'} />
         <View style={layout.content}>
           <OrderGroup items={items} />
         </View>

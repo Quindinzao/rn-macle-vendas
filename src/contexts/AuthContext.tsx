@@ -72,13 +72,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoading(true);
     try {
       const result = await userAuthentication({ username, password });
-      console.log('Login result:', result);
 
       if (!result?.token) {
         throw new Error('[Auth] Token não encontrado na resposta');
       }
 
-      const exp = decodeToken(result.token); // extrair exp do token JWT
+      const exp = decodeToken(result.token);
 
       if (!exp) {
         throw new Error('[Auth] Expiração do token inválida');

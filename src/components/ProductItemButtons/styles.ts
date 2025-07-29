@@ -4,9 +4,12 @@ import { Theme } from '../../styles/theme';
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
+      height: '100%',
       flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'center',
+      position: 'absolute',
+      right: 0,
     },
     buttonSize: {
       alignItems: 'center',

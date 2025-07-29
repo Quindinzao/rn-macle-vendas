@@ -1,53 +1,32 @@
 // External libraries
-import { FlatList, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Components
-import Header from '../../components/Header';
-import ProductItem from '../../components/ProductItem';
-import ButtonNext from '../../components/ButtonNext';
+import ShoppingCartView from '../../components/ShoppingCartView';
+
+// Hooks - Common
+import { useCart } from '../../hooks/common/useCartController';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
 
-// Styles
-import { layout } from '../../styles/globalStyle';
-import EmptyList from '../../components/EmptyList';
-
-const mockData = [
-  { id: '1', name: 'Produto 1' },
-  { id: '2', name: 'Produto 2' },
-];
-
 const ShoppingCart: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
+  const { cartItems, totalPrice, refreshing, refreshCart } = useCart();
+
   const handleGoToDelivery = () => {
     navigation.navigate('Delivery');
   };
-  return (
-    <>
-      <FlatList
-        data={mockData}
-        keyExtractor={item => item.id}
-        renderItem={() => <ProductItem />}
-        ListHeaderComponent={<Header title={'Carrinho'} />}
-        ListEmptyComponent={
-          <EmptyList message={'Lista vazia. Adicione itens ao seu carrinho.'} />
-        }
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={layout.flatListContent}
-        style={layout.flatListContainer}
-      />
 
-      <View style={layout.footer}>
-        <ButtonNext
-          onPress={handleGoToDelivery}
-          title={'Continuar'}
-          amount={'30,00'}
-        />
-      </View>
-    </>
+  return (
+    <ShoppingCartView
+      cartItems={cartItems}
+      totalPrice={totalPrice}
+      refreshing={refreshing}
+      onRefresh={refreshCart}
+      onGoToDelivery={handleGoToDelivery}
+    />
   );
 };
 

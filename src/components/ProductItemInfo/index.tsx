@@ -10,21 +10,31 @@ import { screenWidth } from '../../utils/helpers/dimensions';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { ProductItemInfoProps } from '../../interfaces/ProductItemProps';
+
 // Styles
 import { createStyles } from './styles';
 
-const ProductItemInfo: React.FC = () => {
+const ProductItemInfo: React.FC<ProductItemInfoProps> = ({
+  description,
+  price,
+  name,
+}) => {
   const theme = useAppTheme();
   const styles = createStyles(theme, screenWidth);
 
   return (
     <View style={styles.container}>
-      <Text type={'titleSmall'}>Smartphone</Text>
-      <Text type={'caption'} numberOfLines={3} style={styles.description}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        quis euismod augue.
+      <Text type={'titleSmall'} style={styles.text}>
+        {name}
       </Text>
-      <Text type={'titleMedium'}>R$30,00</Text>
+      <Text type={'caption'} numberOfLines={3} style={styles.description}>
+        {description}
+      </Text>
+      <Text type={'titleMedium'} style={styles.text}>
+        R${price}
+      </Text>
     </View>
   );
 };
