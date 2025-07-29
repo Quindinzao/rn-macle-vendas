@@ -8,12 +8,8 @@ import ProductItemImage from '../ProductItemImage';
 import ProductItemInfo from '../ProductItemInfo';
 import ProductItemButtons from '../ProductItemButtons';
 
-// Database
-import {
-  deleteCart,
-  insertOrUpdateOrder,
-  updateOrder,
-} from '../../database/cart';
+// Contexts
+import { useCartContext } from '../../contexts/CartContext';
 
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
@@ -32,42 +28,52 @@ const ProductItem: React.FC<ProductItemProps> = ({
   orderId,
   quantityInitial = 0,
 }) => {
+  const { createItem, updateItem, removeItem } = useCartContext();
   const theme = useAppTheme();
   const styles = createStyle(theme, screenWidth);
+
   const [quantity, setQuantity] = useState(quantityInitial);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const syncWithDB = async (quantityProducts: number) => {
     try {
-      if (quantity > 0) {
+      if (quantityProducts > 0) {
         if (orderId) {
-          await updateOrder(
-            orderId,
-            quantityProducts * product.price,
-            quantityProducts,
-          );
-        } else {
-          await insertOrUpdateOrder({
+          updateItem({
+            id: orderId,
             quantity: quantityProducts,
-            Product: {
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              image: product.image,
-              description: product.description,
-            },
+            productPrice: product.price,
+          });
+        } else {
+          createItem({
+            price: product.price,
+            productDescription: product.description,
+            productId: product.id,
+            productImage: product.image,
+            productName: product.name,
+            productPrice: product.price,
+            quantity: quantityProducts,
           });
         }
       } else if (orderId) {
-        await deleteCart(orderId);
+        removeItem(orderId);
       }
     } catch (e) {
-      console.error('Erro ao sincronizar item com carrinho:', e);
+      console.log('Erro ao sincronizar item com carrinho:', e);
     }
   };
 
   useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      return;
+    }
     syncWithDB(quantity);
   }, [quantity]);
+
+  useEffect(() => {
+    setQuantity(quantityInitial);
+  }, [quantityInitial]);
 
   return (
     <>

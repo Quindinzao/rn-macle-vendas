@@ -19,13 +19,13 @@ export const setupInterceptors = (
           config.headers.Authorization = `Bearer ${token}`;
         }
       } catch (err) {
-        console.error('Erro ao obter token:', err);
+        console.log('Erro ao obter token:', err);
         showSnackbar('Erro ao preparar requisição de autenticação.');
       }
       return config;
     },
     error => {
-      console.error('Erro na requisição:', error);
+      console.log('Erro na requisição:', error);
       showSnackbar('Erro ao preparar requisição.');
       return Promise.reject(error);
     },
@@ -63,10 +63,10 @@ export const setupInterceptors = (
           showSnackbar(message);
         }
       } else if (error.request) {
-        console.error('Erro sem resposta:', error);
+        console.log('Erro sem resposta:', error);
         showSnackbar('Sem resposta do servidor. Verifique sua conexão.');
       } else {
-        console.error('Erro desconhecido:', error.message);
+        console.log('Erro desconhecido:', error.message);
         showSnackbar(`Erro desconhecido: ${error.message}`);
       }
 

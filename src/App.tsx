@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // Contexts
 import { AuthProvider } from './contexts/AuthContext';
 import { SnackbarProvider } from './contexts/SnackbarContext';
+import { CartProvider } from './contexts/CartContext';
 
 // Routes
 import Routes from './routes';
@@ -16,11 +17,13 @@ const App: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <AuthProvider>
-        <SnackbarProvider>
-          <SafeAreaProvider>
-            <Routes />
-          </SafeAreaProvider>
-        </SnackbarProvider>
+        <CartProvider>
+          <SnackbarProvider>
+            <SafeAreaProvider>
+              <Routes />
+            </SafeAreaProvider>
+          </SnackbarProvider>
+        </CartProvider>
       </AuthProvider>
     </PaperProvider>
   );

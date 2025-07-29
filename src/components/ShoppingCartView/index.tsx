@@ -32,11 +32,13 @@ const ShoppingCartView: React.FC<ShoppingCartViewProps> = ({
     <>
       <FlatList
         data={cartItems}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item, index) =>
+          item.id ? item.id.toString() : index.toString()
+        }
         renderItem={({ item }) => (
           <ProductItem
             product={{
-              id: item.id,
+              id: item.productId,
               name: item.productName,
               image: item.productImage,
               description: item.productDescription,

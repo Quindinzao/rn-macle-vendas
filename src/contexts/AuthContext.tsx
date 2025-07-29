@@ -8,7 +8,7 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 
-// Hooks
+// Hooks - Services
 import useUserRequests from '../hooks/services/useUserRequests';
 
 // Interfaces
@@ -29,7 +29,7 @@ const decodeToken = (token: string) => {
     const decoded = jwtDecode<{ exp: number }>(token);
     return decoded.exp;
   } catch (error) {
-    console.error('Erro ao decodificar o token JWT:', error);
+    console.log('Erro ao decodificar o token JWT:', error);
     return null;
   }
 };

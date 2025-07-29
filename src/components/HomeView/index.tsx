@@ -6,16 +6,11 @@ import HeaderSection from '../HeaderSection';
 import ProductItem from '../ProductItem';
 import EmptyList from '../EmptyList';
 
+// Interfaces
+import { HomeViewProps } from '../../interfaces/HomeViewProps';
+
 // Styles
 import { layout } from '../../styles/globalStyle';
-
-interface HomeViewProps {
-  products: any[];
-  loading: boolean;
-  fetchProducts: () => void;
-  setVisible: (v: boolean) => void;
-  titleHeader: string;
-}
 
 const HomeView: React.FC<HomeViewProps> = ({
   products,

@@ -2,8 +2,8 @@
 // External libraries
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-// Database
-import { getAllCart } from '../../database/cart';
+// Contexts
+import { useCartContext } from '../../contexts/CartContext';
 
 // Hooks - Services
 import useProductsRequests from '../../hooks/services/useProductsRequest';
@@ -19,6 +19,21 @@ export const useHomeController = () => {
   const { productAll } = useProductsRequests();
   const loadingRef = useRef(false);
 
+  const { cartItems } = useCartContext();
+
+  const syncCartQuantities = useCallback(
+    (serverProducts: any[]) => {
+      const cartMap = new Map(cartItems.map(item => [item.productId, item]));
+
+      return serverProducts.map(product => ({
+        ...product,
+        quantity: cartMap.get(product.id)?.quantity || 0,
+        orderId: cartMap.get(product.id)?.id || null,
+      }));
+    },
+    [cartItems],
+  );
+
   const fetchProducts = useCallback(async () => {
     if (loadingRef.current || !hasMore) return;
 
@@ -27,15 +42,7 @@ export const useHomeController = () => {
 
     try {
       const response = await productAll(LIMIT, offset);
-      const cartItems = await getAllCart();
-
-      const cartMap = new Map(cartItems.map(item => [item.productId, item]));
-
-      const mergedProducts = response.products.map((product: { id: any }) => ({
-        ...product,
-        quantity: cartMap.get(product.id)?.quantity || 0,
-        orderId: cartMap.get(product.id)?.id || null,
-      }));
+      const mergedProducts = syncCartQuantities(response.products || []);
 
       if (response.products?.length > 0) {
         setProducts(prev => [...prev, ...mergedProducts]);
@@ -49,11 +56,15 @@ export const useHomeController = () => {
       setLoading(false);
       loadingRef.current = false;
     }
-  }, [offset, hasMore]);
+  }, [offset, hasMore, cartItems]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    setProducts(prev => syncCartQuantities(prev));
+  }, [cartItems]);
 
   return {
     visible,

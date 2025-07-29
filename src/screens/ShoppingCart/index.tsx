@@ -5,15 +5,19 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 // Components
 import ShoppingCartView from '../../components/ShoppingCartView';
 
+// Contexts
+import { useCartContext } from '../../contexts/CartContext';
+
 // Hooks - Common
-import { useCart } from '../../hooks/common/useCartController';
+import { useCartController } from '../../hooks/common/useCartController';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
 
 const ShoppingCart: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
-  const { cartItems, totalPrice, refreshing, refreshCart } = useCart();
+  const { refreshing } = useCartController();
+  const { cartItems, refreshCart, totalPrice } = useCartContext();
 
   const handleGoToDelivery = () => {
     navigation.navigate('Delivery');

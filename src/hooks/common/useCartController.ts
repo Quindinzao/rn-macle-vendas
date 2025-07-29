@@ -9,7 +9,7 @@ import { getAllCart } from '../../database/cart';
 // Interfaces
 import { CartItem } from '../../interfaces/CartItemProps';
 
-export const useCart = () => {
+export const useCartController = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -21,7 +21,7 @@ export const useCart = () => {
       const total = items.reduce((sum, item) => sum + item.price, 0);
       setTotalPrice(total);
     } catch (error) {
-      console.error('Erro ao carregar o carrinho:', error);
+      console.log('Erro ao carregar o carrinho:', error);
     }
   };
 
