@@ -24,22 +24,16 @@ import {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const useCartContext = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCartContext must be used within a CartProvider');
-  }
-  return context;
-};
-
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const refreshCart = async () => {
     try {
+      setRefreshing(true);
       const items = await getAllCart();
       setCartItems(items);
 
@@ -49,6 +43,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       setTotalPrice(total);
     } catch (error) {
       console.log('Erro ao buscar carrinho:', error);
+    } finally {
+      setRefreshing(false);
     }
   };
 
@@ -98,10 +94,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  // const requestProducts = async () => {
-  //   await fetchProducts();
-  // };
-
   useEffect(() => {
     refreshCart();
   }, []);
@@ -115,10 +107,19 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         updateItem,
         removeItem,
         refreshCart,
-        totalPrice, // incluído no value
+        totalPrice,
+        refreshing,
       }}
     >
       {children}
     </CartContext.Provider>
   );
+};
+
+export const useCartContext = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCartContext must be used within a CartProvider');
+  }
+  return context;
 };

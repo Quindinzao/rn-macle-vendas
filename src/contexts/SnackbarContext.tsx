@@ -9,8 +9,6 @@ const SnackbarContext = createContext<SnackbarContextData>({
   showSnackbar: () => {},
 });
 
-export const useSnackbar = () => useContext(SnackbarContext);
-
 export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -36,3 +34,5 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
     </SnackbarContext.Provider>
   );
 };
+
+export const useSnackbar = () => useContext(SnackbarContext);

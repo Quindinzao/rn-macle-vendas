@@ -16,6 +16,7 @@ export interface CartItemUpdate {
 }
 
 export interface CartContextType {
+  refreshing: boolean;
   totalPrice: number;
   cartItems: CartItem[];
   setCartItems: (items: CartItem[]) => void;
