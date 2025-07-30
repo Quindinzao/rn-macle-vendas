@@ -6,6 +6,7 @@ export const initialErrors: Record<AddressFields, string> = {
   neighborhood: '',
   number: '',
   cep: '',
+  street: '',
 };
 
 export const validateAddressFields = (
@@ -16,4 +17,5 @@ export const validateAddressFields = (
   neighborhood: fields.neighborhood.trim() ? '' : 'Bairro é obrigatório.',
   number: fields.number.trim() ? '' : 'Número é obrigatório.',
   cep: fields.cep.trim() ? '' : 'CEP é obrigatório.',
+  street: fields.street.trim() ? '' : 'Rua é obrigatória.',
 });

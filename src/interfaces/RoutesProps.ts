@@ -1,9 +1,10 @@
 export type RoutesProps = {
   LoginRegister: undefined;
   Tabs: { initialTab?: 'home' | 'shoppingCart' | 'orders' };
-  Delivery: undefined;
-  Address: undefined;
-  PaymentMethod: undefined;
-  Card: undefined;
+  Delivery: { totalPrice: number };
+  Address: { totalPrice: number };
+  PaymentMethod: { totalPrice: number; address?: string };
+  Card: { totalPrice: number; address?: string; paymentMethod: string };
+  Pix: { totalPrice: number; address?: string; paymentMethod: string };
   AllDone: undefined;
 };

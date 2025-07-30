@@ -6,7 +6,7 @@ interface RegisterPayload {
   password: string;
 }
 
-const useUserRequests = () => {
+const useUserRequest = () => {
   const { api } = useApi();
 
   return {
@@ -27,4 +27,4 @@ const useUserRequests = () => {
   };
 };
 
-export default useUserRequests;
+export default useUserRequest;

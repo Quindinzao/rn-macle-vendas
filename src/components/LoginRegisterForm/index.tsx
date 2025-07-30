@@ -10,7 +10,7 @@ import TextField from '../../components/TextField';
 import { useAuth } from '../../contexts/AuthContext';
 
 // Hooks - Services
-import useUserRequests from '../../hooks/services/useUserRequests';
+import useUserRequest from '../../hooks/services/useUserRequest';
 
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
@@ -20,7 +20,7 @@ import { createStyles } from './styles';
 
 const LoginRegisterForm: React.FC = () => {
   const { handleSignIn } = useAuth();
-  const { userRegister } = useUserRequests();
+  const { userRegister } = useUserRequest();
 
   const [credentials, setCredentials] = useState({
     username: '',

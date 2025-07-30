@@ -6,6 +6,15 @@ import { ScrollView, View } from 'react-native';
 import Button from '../Button';
 import TextField from '../TextField';
 
+// Contexts
+import { useSnackbar } from '../../contexts/SnackbarContext';
+
+// Database
+import { insertAddress } from '../../database/address';
+
+// Services
+import { addressValidator } from '../../services/addressValidator';
+
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
@@ -16,13 +25,14 @@ import {
 } from '../../utils/validators/addressValidator';
 
 // Interfaces
-import { AddressFields } from '../../interfaces/AddressProps';
+import { AddressFields, AddressFormProps } from '../../interfaces/AddressProps';
 
 // Styles
 import { createStyles } from './styles';
 import { layout } from '../../styles/globalStyle';
 
-const AddressForm: React.FC = () => {
+const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
+  const { showSnackbar } = useSnackbar();
   const [form, setForm] = useState<Record<AddressFields, string>>({
     city: '',
     uf: '',
@@ -31,7 +41,6 @@ const AddressForm: React.FC = () => {
     number: '',
     cep: '',
   });
-
   const [errors, setErrors] = useState(initialErrors);
 
   const theme = useAppTheme();
@@ -47,17 +56,47 @@ const AddressForm: React.FC = () => {
     [errors],
   );
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = async () => {
     const newErrors = validateAddressFields(form);
     setErrors(newErrors);
 
     const isValid = Object.values(newErrors).every(error => !error);
 
     if (isValid) {
-      console.log('Dados enviados:', form);
-      // ENVIAR DADOS PARA O SQLITE
+      const addressParts = [
+        form.street,
+        form.number,
+        form.neighborhood,
+        form.city,
+        form.uf,
+        form.cep,
+      ];
+
+      const addressString = addressParts.join(', ');
+      const result = await addressValidator(addressString);
+      if (result.isValid) {
+        await insertAddress({
+          cep: form.cep,
+          streetName: form.street,
+          neighborhood: form.neighborhood,
+          number: form.number,
+          city: form.city,
+          state: form.uf,
+        });
+        setForm({
+          city: '',
+          uf: '',
+          neighborhood: '',
+          street: '',
+          number: '',
+          cep: '',
+        });
+        setVisible(false);
+      } else {
+        showSnackbar('Endereço inválido, por favor, insira um endereço válido');
+      }
     }
-  }, [form]);
+  };
 
   const renderInput = (
     label: string,

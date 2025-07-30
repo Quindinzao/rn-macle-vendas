@@ -2622,6 +2622,13 @@ caniuse-lite@^1.0.30001726:
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001727.tgz"
   integrity sha512-pB68nIHmbN6L/4C6MH1DokyR3bYqFwjaSs/sWDHGj4CTcFtQUQMuJftVwWkXq7mNWOybD3KhUv3oWHoGxgP14Q==
 
+card-validator@^10.0.3:
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-10.0.3.tgz#61640cfa1d3b5f387247b696ef26693558925f94"
+  integrity sha512-xOEDsK3hojV0OIpmrR64eZGpngnOqRDEP20O+WSRtvjLSW6nyekW4i2N9SzYg679uFO3RyHcFHxb+mml5tXc4A==
+  dependencies:
+    credit-card-type "^10.0.2"
+
 chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npmjs.org/chalk/-/chalk-4.1.2.tgz"
@@ -2890,6 +2897,11 @@ create-jest@^29.7.0:
     jest-config "^29.7.0"
     jest-util "^29.7.0"
     prompts "^2.0.1"
+
+credit-card-type@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-10.0.2.tgz#a9be299ecd0ea44f4b51c8212109670bb0f4e669"
+  integrity sha512-vt/iQokU0mtrT7ceRU75FSmWnIh5JFpLsUUUWYRmztYekOGm0ZbCuzwFTbNkq41k92y+0B8ChscFhRN9DhVZEA==
 
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.6"

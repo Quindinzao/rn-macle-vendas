@@ -14,9 +14,16 @@ import { createStyles } from './styles';
 interface RadioFormProps {
   title: string;
   items: { title: string; image?: any }[];
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const RadioForm: React.FC<RadioFormProps> = ({ title, items }) => {
+const RadioForm: React.FC<RadioFormProps> = ({
+  title,
+  items,
+  value,
+  setValue,
+}) => {
   const theme = useAppTheme();
   const styles = createStyles(theme);
 
@@ -25,7 +32,7 @@ const RadioForm: React.FC<RadioFormProps> = ({ title, items }) => {
       <Text style={styles.text} type={'titleSmall'}>
         {title}
       </Text>
-      <RadioButton items={items} />
+      <RadioButton items={items} value={value} setValue={setValue} />
     </View>
   );
 };

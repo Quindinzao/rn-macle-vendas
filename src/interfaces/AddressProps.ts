@@ -5,3 +5,7 @@ export type AddressFields =
   | 'neighborhood'
   | 'number'
   | 'cep';
+
+export interface AddressFormProps {
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}

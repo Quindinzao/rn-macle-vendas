@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 
 // Hooks - Services
-import useUserRequests from '../hooks/services/useUserRequests';
+import useUserRequest from '../hooks/services/useUserRequest';
 
 // Interfaces
 import {
@@ -37,7 +37,7 @@ const decodeToken = (token: string) => {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { userAuthentication } = useUserRequests();
+  const { userAuthentication } = useUserRequest();
 
   const isTokenExpired = (exp: number): boolean => {
     const now = Math.floor(Date.now() / 1000);

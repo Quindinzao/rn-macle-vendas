@@ -6,6 +6,12 @@ import { ScrollView, View } from 'react-native';
 import Button from '../Button';
 import TextField from '../TextField';
 
+// Contexts
+import { useSnackbar } from '../../contexts/SnackbarContext';
+
+// Database
+import { insertCard } from '../../database/card';
+
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
@@ -14,17 +20,22 @@ import {
   initialErrors,
   validateCardFields,
 } from '../../utils/validators/cardValidator';
+import { formatCardNumber } from '../../utils/validators/cardNumberMask';
+import { formatExpirationDate } from '../../utils/validators/expirationDateMask';
+import { formatCvv } from '../../utils/validators/cvvMask';
+import { cardFormValidator } from '../../utils/validators/cardFormValidatos';
 
 // Interfaces
-import { CardFields } from '../../interfaces/CardProps';
+import { CardFields, CardFormProps } from '../../interfaces/CardProps';
 
 // Styles
 import { createStyles } from './styles';
 import { layout } from '../../styles/globalStyle';
 
-const CardForm: React.FC = () => {
+const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme);
+  const { showSnackbar } = useSnackbar();
 
   const [form, setForm] = useState<Record<CardFields, string>>({
     nickname: '',
@@ -37,7 +48,21 @@ const CardForm: React.FC = () => {
 
   const handleChange = useCallback(
     (field: CardFields, value: string) => {
-      setForm(prev => ({ ...prev, [field]: value }));
+      let formatted = value;
+
+      switch (field) {
+        case 'cardNumber':
+          formatted = formatCardNumber(value);
+          break;
+        case 'expirationDate':
+          formatted = formatExpirationDate(value);
+          break;
+        case 'cvv':
+          formatted = formatCvv(value);
+          break;
+      }
+
+      setForm(prev => ({ ...prev, [field]: formatted }));
       if (errors[field]) {
         setErrors(prev => ({ ...prev, [field]: '' }));
       }
@@ -45,17 +70,34 @@ const CardForm: React.FC = () => {
     [errors],
   );
 
-  const handleSubmit = useCallback(() => {
-    const newErrors = validateCardFields(form);
-    setErrors(newErrors);
+  const handleSubmit = () => {
+    // const newErrors = validateCardFields(form);
+    // setErrors(newErrors);
 
-    const isValid = Object.values(newErrors).every(error => !error);
+    // const isValid =
+    //   Object.values(newErrors).every(error => !error) &&
+    //   cardFormValidator(form);
 
-    if (isValid) {
-      console.log('Dados enviados:', form);
-      // FAZER ENVIO PARA SQLITE OU API
-    }
-  }, [form]);
+    // console.log({ isValid });
+
+    // if (isValid) {
+    //   insertCard({
+    //     nickname: form.nickname,
+    //     cardNumber: form.cardNumber,
+    //     cvv: form.cvv,
+    //     expirationDate: form.expirationDate,
+    //   });
+    //   setForm({
+    //     nickname: '',
+    //     cardNumber: '',
+    //     cvv: '',
+    //     expirationDate: '',
+    //   });
+    //   setVisible(false);
+    // } else {
+    showSnackbar('Cartão inválido.');
+    // }
+  };
 
   const renderInput = (
     label: string,

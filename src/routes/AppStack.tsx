@@ -13,6 +13,7 @@ import BottomTabs from './BottomTabs';
 
 // Interfaces
 import { RoutesProps } from '../interfaces/RoutesProps';
+import Pix from '../screens/Pix';
 
 const { Navigator, Screen } = createNativeStackNavigator<RoutesProps>();
 
@@ -24,6 +25,7 @@ const AppStack: React.FC = () => {
       <Screen name={'Address'} component={Address} />
       <Screen name={'PaymentMethod'} component={PaymentMethod} />
       <Screen name={'Card'} component={Card} />
+      <Screen name={'Pix'} component={Pix} />
       <Screen name={'AllDone'} component={AllDone} />
     </Navigator>
   );

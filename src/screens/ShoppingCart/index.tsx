@@ -16,7 +16,7 @@ const ShoppingCart: React.FC = () => {
   const { refreshing, cartItems, totalPrice, refreshCart } = useCartContext();
 
   const handleGoToDelivery = () => {
-    navigation.navigate('Delivery');
+    navigation.navigate('Delivery', { totalPrice });
   };
 
   return (

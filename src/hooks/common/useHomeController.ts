@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCartContext } from '../../contexts/CartContext';
 
 // Hooks - Services
-import useProductsRequests from '../../hooks/services/useProductsRequest';
+import useProductsRequest from '../../hooks/services/useProductsRequest';
 
 export const useHomeController = () => {
   const [visible, setVisible] = useState(false);
@@ -16,7 +16,7 @@ export const useHomeController = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const LIMIT = 10;
-  const { productAll } = useProductsRequests();
+  const { productAll } = useProductsRequest();
   const loadingRef = useRef(false);
 
   const { cartItems } = useCartContext();

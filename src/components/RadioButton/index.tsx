@@ -1,5 +1,4 @@
 // External libraries
-import { useState } from 'react';
 import { View } from 'react-native';
 import { RadioButton as RNPRadioButton } from 'react-native-paper';
 
@@ -19,8 +18,11 @@ import { RadioButtonProps } from '../../interfaces/RadioButtonProps';
 import { layout } from '../../styles/globalStyle';
 import { createStyles } from './styles';
 
-const RadioButton: React.FC<RadioButtonProps> = ({ items }) => {
-  const [value, setValue] = useState('');
+const RadioButton: React.FC<RadioButtonProps> = ({
+  items,
+  value,
+  setValue,
+}) => {
   const theme = useAppTheme();
   const styles = createStyles(theme, screenWidth);
 

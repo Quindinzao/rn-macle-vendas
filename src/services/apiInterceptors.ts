@@ -1,6 +1,8 @@
 // External libraries
 import { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Constants
 import { AUTH_KEY } from '../constants/authKey';
 
 export const setupInterceptors = (
@@ -10,6 +12,7 @@ export const setupInterceptors = (
 ) => {
   if ((api as any)._interceptorsConfigured) return;
   (api as any)._interceptorsConfigured = true;
+
   api.interceptors.request.use(
     async (config: InternalAxiosRequestConfig) => {
       try {
