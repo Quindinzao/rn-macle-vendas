@@ -8,7 +8,7 @@ import Text from '../Text';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { ProductItemButtonsProps } from '../../interfaces/ProductItemButtonsProps';
+import { ProductItemButtonsProps } from '../../interfaces/ProductProps';
 
 // Assets
 import Subtract from '../../assets/icons/Subtract';

@@ -1,13 +1,8 @@
+// Components
 import OrderItem from '../OrderItem';
 
-interface OrderGroupProps {
-  items: {
-    id: string;
-    updateDate?: string;
-    requestDate: string;
-    status: 'pendente' | 'concluído' | 'cancelado' | 'em andamento';
-  }[];
-}
+// Interfaces
+import { OrderGroupProps } from '../../interfaces/OrderProps';
 
 const OrderGroup: React.FC<OrderGroupProps> = ({ items }) => {
   return (

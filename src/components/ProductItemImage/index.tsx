@@ -5,7 +5,7 @@ import { Image, View } from 'react-native';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { ProductItemImageProps } from '../../interfaces/ProductItemProps';
+import { ProductItemImageProps } from '../../interfaces/ProductProps';
 
 // Styles
 import { createStyles } from './styles';

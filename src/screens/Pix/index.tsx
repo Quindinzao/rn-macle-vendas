@@ -7,7 +7,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Header from '../../components/Header';
 import ButtonNext from '../../components/ButtonNext';
 
-// Routes
+// Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Styles

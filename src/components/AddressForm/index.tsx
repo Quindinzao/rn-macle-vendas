@@ -25,7 +25,10 @@ import {
 } from '../../utils/validators/addressValidator';
 
 // Interfaces
-import { AddressFields, AddressFormProps } from '../../interfaces/AddressProps';
+import {
+  AddressFieldsProps,
+  AddressFormProps,
+} from '../../interfaces/AddressProps';
 
 // Styles
 import { createStyles } from './styles';
@@ -33,7 +36,7 @@ import { layout } from '../../styles/globalStyle';
 
 const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
   const { showSnackbar } = useSnackbar();
-  const [form, setForm] = useState<Record<AddressFields, string>>({
+  const [form, setForm] = useState<Record<AddressFieldsProps, string>>({
     city: '',
     uf: '',
     neighborhood: '',
@@ -47,7 +50,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
   const styles = createStyles(theme);
 
   const handleChange = useCallback(
-    (field: AddressFields, value: string) => {
+    (field: AddressFieldsProps, value: string) => {
       setForm(prev => ({ ...prev, [field]: value }));
       if (errors[field]) {
         setErrors(prev => ({ ...prev, [field]: '' }));
@@ -100,7 +103,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
 
   const renderInput = (
     label: string,
-    field: AddressFields,
+    field: AddressFieldsProps,
     keyboardType: 'default' | 'numeric' = 'default',
   ) => (
     <TextField

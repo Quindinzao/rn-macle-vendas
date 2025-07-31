@@ -8,7 +8,7 @@ import Text from '../Text';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { EmptyListProps } from '../../interfaces/EmptyList';
+import { EmptyListProps } from '../../interfaces/EmptyListProps';
 
 // Styles
 import { createStyles } from './styles';

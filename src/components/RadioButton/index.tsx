@@ -12,7 +12,7 @@ import { useAppTheme } from '../../hooks/common/useAppTheme';
 import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Interfaces
-import { RadioButtonProps } from '../../interfaces/RadioButtonProps';
+import { RadioButtonProps } from '../../interfaces/RadioProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';

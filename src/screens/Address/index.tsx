@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // External libraries
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -16,8 +15,8 @@ import ModalBase from '../../components/ModalBase';
 // Contexts
 import { useSnackbar } from '../../contexts/SnackbarContext';
 
-// Database
-import { getAllAddresses } from '../../database/address';
+// Hooks
+import { useSavedAddresses } from '../../hooks/common/useSavedAddress';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
@@ -26,72 +25,58 @@ import { RoutesProps } from '../../interfaces/RoutesProps';
 import { layout } from '../../styles/globalStyle';
 
 const Address: React.FC = () => {
-  const { showSnackbar } = useSnackbar();
-  const [savedAddress, setSavedAddress] = useState<{ title: string }[]>([]);
-  const [value, setValue] = useState('');
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
   const route = useRoute<RouteProp<RoutesProps, 'Address'>>();
+
+  const [selectedAddress, setSelectedAddress] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const savedAddresses = useSavedAddresses(isModalVisible);
   const { totalPrice } = route.params;
 
-  const handleGoToPaymentMethod = () => {
-    if (value) {
-      navigation.navigate('PaymentMethod', { totalPrice, address: value });
-    } else {
-      showSnackbar('Selecione um endereço.');
+  const handleContinue = () => {
+    if (!selectedAddress) {
+      return showSnackbar('Selecione um endereço.');
     }
+
+    navigation.navigate('PaymentMethod', {
+      totalPrice,
+      address: selectedAddress,
+    });
   };
 
-  const [visible, setVisible] = useState(false);
-  const showModal = () => setVisible(true);
-
-  const getItemTransport = async () => {
-    try {
-      const items = await getAllAddresses();
-
-      const formattedAddresses = items.map((address: any) => {
-        return {
-          title: `${address.streetName}, ${address.number}, ${address.neighborhood}, ${address.city} - ${address.state}, ${address.cep}`,
-        };
-      });
-
-      setSavedAddress(formattedAddresses);
-    } catch (err: any) {
-      showSnackbar('Falha ao mostrar endereços.');
-    }
-  };
-
-  useEffect(() => {
-    getItemTransport();
-  }, [visible]);
+  const { showSnackbar } = useSnackbar();
 
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Endereço'} isBack />
+        <Header title="Endereço" isBack />
         <View style={layout.content}>
           <RadioForm
-            title={'Endereços salvos'}
-            items={savedAddress || []}
-            value={value}
-            setValue={setValue}
+            title="Endereços salvos"
+            items={savedAddresses}
+            value={selectedAddress}
+            setValue={setSelectedAddress}
           />
-          <Button mode={'text'} onPress={showModal}>
+          <Button mode="text" onPress={() => setIsModalVisible(true)}>
             Adicionar endereço
           </Button>
         </View>
       </ScrollView>
+
       <View style={layout.footer}>
         <ButtonNext
-          onPress={handleGoToPaymentMethod}
-          title={'Continuar'}
+          onPress={handleContinue}
+          title="Continuar"
           amount={totalPrice.toString()}
         />
+
         <ModalBase
-          title={'Adicione o endereço de entrega'}
-          visible={visible}
-          setVisible={setVisible}
+          title="Adicione o endereço de entrega"
+          visible={isModalVisible}
+          setVisible={setIsModalVisible}
         >
-          <AddressForm setVisible={setVisible} />
+          <AddressForm setVisible={setIsModalVisible} />
         </ModalBase>
       </View>
     </View>

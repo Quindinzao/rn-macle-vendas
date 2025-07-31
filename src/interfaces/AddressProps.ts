@@ -1,4 +1,4 @@
-export type AddressFields =
+export type AddressFieldsProps =
   | 'city'
   | 'uf'
   | 'street'
@@ -10,6 +10,6 @@ export interface AddressFormProps {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface Address {
+export interface AddressItem {
   title: string;
 }

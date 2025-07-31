@@ -13,15 +13,17 @@ import useUserRequest from '../hooks/services/useUserRequest';
 
 // Interfaces
 import {
-  AuthContextData,
-  AuthData,
+  AuthContextDataProps,
+  AuthDataProps,
   AuthProviderProps,
-} from '../interfaces/AuthContextProps';
+} from '../interfaces/AuthProps';
 
 // Constants
 import { AUTH_KEY } from '../constants/authKey';
 
-const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+const AuthContext = createContext<AuthContextDataProps>(
+  {} as AuthContextDataProps,
+);
 
 const decodeToken = (token: string) => {
   try {
@@ -34,7 +36,9 @@ const decodeToken = (token: string) => {
 };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [authData, setAuthData] = useState<AuthData | undefined>(undefined);
+  const [authData, setAuthData] = useState<AuthDataProps | undefined>(
+    undefined,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { userAuthentication } = useUserRequest();
 
@@ -48,7 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
 
       if (storedAuth) {
-        const parsed = JSON.parse(storedAuth) as AuthData;
+        const parsed = JSON.parse(storedAuth) as AuthDataProps;
 
         if (!isTokenExpired(parsed.exp)) {
           setAuthData(parsed);
@@ -82,7 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error('[Auth] Expiração do token inválida');
       }
 
-      const auth: AuthData = {
+      const auth: AuthDataProps = {
         token: result.token,
         exp,
         userId: result.user.id,

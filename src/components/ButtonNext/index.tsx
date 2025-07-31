@@ -8,17 +8,14 @@ import Button from '../Button';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { ButtonNextProps } from '../../interfaces/ButtonProps';
+
 // Utils
 import { screenWidth } from '../../utils/helpers/dimensions';
 
 // Styles
 import { createStyles } from './styles';
-
-interface ButtonNextProps {
-  onPress: () => void;
-  title: string;
-  amount: string;
-}
 
 const ButtonNext: React.FC<ButtonNextProps> = ({ onPress, title, amount }) => {
   const theme = useAppTheme();

@@ -8,6 +8,9 @@ import Button from '../Button';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { HeaderModalProps } from '../../interfaces/HeaderProps';
+
 // Utils
 import { isIOS } from '../../utils/helpers/platform';
 
@@ -16,11 +19,6 @@ import CloseModal from '../../assets/icons/CloseModal';
 
 // Styles
 import { createStyles } from './styles';
-
-interface HeaderModalProps {
-  title: string;
-  onClose: () => void;
-}
 
 const HeaderModal: React.FC<HeaderModalProps> = ({ title, onClose }) => {
   const theme = useAppTheme();

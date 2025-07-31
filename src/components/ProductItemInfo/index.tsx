@@ -11,7 +11,7 @@ import { screenWidth } from '../../utils/helpers/dimensions';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { ProductItemInfoProps } from '../../interfaces/ProductItemProps';
+import { ProductItemInfoProps } from '../../interfaces/ProductProps';
 
 // Styles
 import { createStyles } from './styles';

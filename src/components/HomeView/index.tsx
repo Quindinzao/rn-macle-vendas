@@ -7,7 +7,7 @@ import ProductItem from '../ProductItem';
 import EmptyList from '../EmptyList';
 
 // Interfaces
-import { HomeViewProps } from '../../interfaces/HomeViewProps';
+import { HomeViewProps } from '../../interfaces/HomeProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';

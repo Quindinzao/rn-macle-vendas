@@ -5,3 +5,9 @@ export interface ButtonProps {
   type?: 'text' | 'image';
   style?: object;
 }
+
+export interface ButtonNextProps {
+  onPress: () => void;
+  title: string;
+  amount: string;
+}

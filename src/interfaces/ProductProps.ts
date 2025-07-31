@@ -1,3 +1,8 @@
+export interface ProductItemButtonsProps {
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+}
+
 export interface ProductItemProps {
   quantityInitial: number;
   orderId?: number;

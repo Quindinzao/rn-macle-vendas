@@ -8,15 +8,11 @@ import RadioButton from '../RadioButton';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { RadioFormProps } from '../../interfaces/RadioProps';
+
 // Styles
 import { createStyles } from './styles';
-
-interface RadioFormProps {
-  title: string;
-  items: { title: string; image?: any }[];
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-}
 
 const RadioForm: React.FC<RadioFormProps> = ({
   title,

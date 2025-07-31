@@ -23,7 +23,7 @@ import { formatCvv } from '../../utils/validators/cvvMask';
 import { cardFormValidator } from '../../utils/validators/cardFormValidator';
 
 // Interfaces
-import { CardFields, CardFormProps } from '../../interfaces/CardProps';
+import { CardFieldsProps, CardFormProps } from '../../interfaces/CardProps';
 
 // Styles
 import { createStyles } from './styles';
@@ -33,7 +33,7 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme);
 
-  const [form, setForm] = useState<Record<CardFields, string>>({
+  const [form, setForm] = useState<Record<CardFieldsProps, string>>({
     nickname: '',
     cardNumber: '',
     cvv: '',
@@ -43,7 +43,7 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   const [errors, setErrors] = useState(initialErrors);
 
   const handleChange = useCallback(
-    (field: CardFields, value: string) => {
+    (field: CardFieldsProps, value: string) => {
       let formatted = value;
 
       switch (field) {
@@ -93,7 +93,7 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
 
   const renderInput = (
     label: string,
-    field: CardFields,
+    field: CardFieldsProps,
     keyboardType: 'default' | 'numeric' = 'default',
   ) => (
     <TextField

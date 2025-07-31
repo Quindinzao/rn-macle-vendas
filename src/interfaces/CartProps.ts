@@ -1,4 +1,4 @@
-export interface CartItem {
+export interface CartItemProps {
   id?: number;
   price: number;
   productDescription: string;
@@ -9,19 +9,19 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface CartItemUpdate {
+export interface CartItemUpdateProps {
   id: number;
   productPrice: number;
   quantity: number;
 }
 
-export interface CartContextType {
+export interface CartContextProps {
   refreshing: boolean;
   totalPrice: number;
-  cartItems: CartItem[];
-  setCartItems: (items: CartItem[]) => void;
-  createItem: (item: CartItem) => void;
-  updateItem: (item: CartItemUpdate) => void;
+  cartItems: CartItemProps[];
+  setCartItems: (items: CartItemProps[]) => void;
+  createItem: (item: CartItemProps) => void;
+  updateItem: (item: CartItemUpdateProps) => void;
   removeItem: (id: number) => void;
   refreshCart: () => void;
 }

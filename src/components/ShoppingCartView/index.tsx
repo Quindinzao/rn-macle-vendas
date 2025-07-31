@@ -8,13 +8,13 @@ import ButtonNext from '../ButtonNext';
 import EmptyList from '../EmptyList';
 
 // Interfaces
-import { CartItem } from '../../interfaces/CartItemProps';
+import { CartItemProps } from '../../interfaces/CartProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
 
 interface ShoppingCartViewProps {
-  cartItems: CartItem[];
+  cartItems: CartItemProps[];
   totalPrice: number;
   refreshing: boolean;
   onRefresh: () => void;

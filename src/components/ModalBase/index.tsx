@@ -10,19 +10,15 @@ import HeaderModal from '../HeaderModal';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { ModalBaseProps } from '../../interfaces/ModalProps';
+
 // Utils
 import { isIOS } from '../../utils/helpers/platform';
 import { screenHeight, screenWidth } from '../../utils/helpers/dimensions';
 
 // Styles
 import { createStyles } from './styles';
-
-interface ModalBaseProps {
-  visible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  children: React.ReactNode;
-  title: string;
-}
 
 const ModalBase: React.FC<ModalBaseProps> = ({
   visible,

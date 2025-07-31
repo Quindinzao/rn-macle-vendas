@@ -1,16 +1,17 @@
 // Services
 import { useApi } from './useApi';
 
-interface RegisterPayload {
-  username: string;
-  password: string;
-}
+// Interfaces
+import { RegisterPayloadProps } from '../../interfaces/AuthProps';
 
 const useUserRequest = () => {
   const { api } = useApi();
 
   return {
-    userAuthentication: async ({ username, password }: RegisterPayload) => {
+    userAuthentication: async ({
+      username,
+      password,
+    }: RegisterPayloadProps) => {
       const response = await api.post('/users/login', {
         username,
         password,
@@ -18,7 +19,7 @@ const useUserRequest = () => {
 
       return response.data;
     },
-    userRegister: async ({ username, password }: RegisterPayload) => {
+    userRegister: async ({ username, password }: RegisterPayloadProps) => {
       return await api.post('/users/register', {
         username,
         password,

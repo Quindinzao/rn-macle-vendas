@@ -3,3 +3,13 @@ export interface HeaderProps {
   isBack?: boolean;
   typeHeader?: 'long' | 'short';
 }
+
+export interface HeaderModalProps {
+  title: string;
+  onClose: () => void;
+}
+
+export interface HeaderSectionProps {
+  title: string;
+  onFilterPress?: () => void;
+}

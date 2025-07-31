@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 
-export interface AuthData {
+export interface AuthDataProps {
   token: string;
   exp: number;
   userId: number;
 }
 
-export interface AuthContextData {
-  authData?: AuthData;
+export interface AuthContextDataProps {
+  authData?: AuthDataProps;
   handleSignIn: (username: string, password: string) => Promise<void>;
   handleSignOut: () => Promise<void>;
   isLoading: boolean;
@@ -15,4 +15,9 @@ export interface AuthContextData {
 
 export interface AuthProviderProps {
   children?: ReactNode;
+}
+
+export interface RegisterPayloadProps {
+  username: string;
+  password: string;
 }

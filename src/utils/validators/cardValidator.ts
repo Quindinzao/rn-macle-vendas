@@ -1,6 +1,7 @@
-import { CardFields } from '../../interfaces/CardProps';
+// Interfaces
+import { CardFieldsProps } from '../../interfaces/CardProps';
 
-export const initialErrors: Record<CardFields, string> = {
+export const initialErrors: Record<CardFieldsProps, string> = {
   nickname: '',
   cardNumber: '',
   cvv: '',
@@ -8,7 +9,7 @@ export const initialErrors: Record<CardFields, string> = {
 };
 
 export const validateCardFields = (
-  fields: Record<CardFields, string>,
+  fields: Record<CardFieldsProps, string>,
 ): typeof initialErrors => ({
   nickname: '',
   cardNumber: fields.cardNumber.trim() ? '' : 'Número do cartão é obrigatório.',

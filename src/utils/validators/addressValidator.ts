@@ -1,6 +1,7 @@
-import { AddressFields } from '../../interfaces/AddressProps';
+// Interfaces
+import { AddressFieldsProps } from '../../interfaces/AddressProps';
 
-export const initialErrors: Record<AddressFields, string> = {
+export const initialErrors: Record<AddressFieldsProps, string> = {
   city: '',
   uf: '',
   neighborhood: '',
@@ -10,7 +11,7 @@ export const initialErrors: Record<AddressFields, string> = {
 };
 
 export const validateAddressFields = (
-  fields: Record<AddressFields, string>,
+  fields: Record<AddressFieldsProps, string>,
 ): typeof initialErrors => ({
   city: fields.city.trim() ? '' : 'Cidade é obrigatória.',
   uf: fields.uf.trim() ? '' : 'Estado é obrigatório.',

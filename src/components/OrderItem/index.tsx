@@ -9,15 +9,11 @@ import Next from '../../assets/icons/Next';
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
+// Interfaces
+import { OrderItemProps } from '../../interfaces/OrderProps';
+
 // Styles
 import { createStyles } from './styles';
-
-interface OrderItemProps {
-  id: string;
-  requestDate: string;
-  updateDate?: string;
-  status: 'pendente' | 'concluído' | 'cancelado' | 'em andamento';
-}
 
 const OrderItem: React.FC<OrderItemProps> = ({
   id,

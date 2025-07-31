@@ -2,12 +2,10 @@
 import ModalBase from '../../components/ModalBase';
 import FilterForm from '../../components/FilterForm';
 
-interface NodalFilterProps {
-  visible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// Interfaces
+import { ModalFilterProps } from '../../interfaces/ModalProps';
 
-const ModalFilter: React.FC<NodalFilterProps> = ({ visible, setVisible }) => (
+const ModalFilter: React.FC<ModalFilterProps> = ({ visible, setVisible }) => (
   <ModalBase
     title={'Filtros e ordenação'}
     visible={visible}

@@ -5,13 +5,11 @@ import { View } from 'react-native';
 import Header from '../Header';
 import SearchRow from '../SearchRow';
 
+// Interfaces
+import { HeaderSectionProps } from '../../interfaces/HeaderProps';
+
 // Styles
 import { layout } from '../../styles/globalStyle';
-
-interface HeaderSectionProps {
-  title: string;
-  onFilterPress?: () => void;
-}
 
 const HeaderSection: React.FC<HeaderSectionProps> = ({
   onFilterPress,

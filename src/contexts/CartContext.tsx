@@ -17,18 +17,18 @@ import {
 
 // Interfaces
 import {
-  CartContextType,
-  CartItem,
-  CartItemUpdate,
-} from '../interfaces/CartItemProps';
+  CartContextProps,
+  CartItemProps,
+  CartItemUpdateProps,
+} from '../interfaces/CartProps';
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemProps[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const refreshCart = async () => {
@@ -48,7 +48,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const createItem = async (item: CartItem) => {
+  const createItem = async (item: CartItemProps) => {
     try {
       await insertOrUpdateOrder({
         quantity: item.quantity,
@@ -67,7 +67,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const updateItem = async (item: CartItemUpdate) => {
+  const updateItem = async (item: CartItemUpdateProps) => {
     try {
       if (item.quantity > 0) {
         await updateOrder(
