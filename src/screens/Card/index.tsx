@@ -102,7 +102,7 @@ const Card: React.FC = () => {
         <ButtonNext
           onPress={handleCreateOrder}
           title="Finalizar"
-          amount={totalPrice.toString()}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
         />
         <ModalBase
           title="Adicione cartão"

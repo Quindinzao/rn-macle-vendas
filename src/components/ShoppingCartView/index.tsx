@@ -8,18 +8,10 @@ import ButtonNext from '../ButtonNext';
 import EmptyList from '../EmptyList';
 
 // Interfaces
-import { CartItemProps } from '../../interfaces/CartProps';
+import { ShoppingCartViewProps } from '../../interfaces/CartProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-
-interface ShoppingCartViewProps {
-  cartItems: CartItemProps[];
-  totalPrice: number;
-  refreshing: boolean;
-  onRefresh: () => void;
-  onGoToDelivery: () => void;
-}
 
 const ShoppingCartView: React.FC<ShoppingCartViewProps> = ({
   cartItems,

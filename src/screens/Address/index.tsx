@@ -68,7 +68,7 @@ const Address: React.FC = () => {
         <ButtonNext
           onPress={handleContinue}
           title="Continuar"
-          amount={totalPrice.toString()}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
         />
 
         <ModalBase

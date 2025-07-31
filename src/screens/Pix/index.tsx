@@ -24,7 +24,7 @@ const Pix: React.FC = () => {
   const { showSnackbar } = useSnackbar();
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
   const route = useRoute<RouteProp<RoutesProps, 'Pix'>>();
-  const { paymentMethod, address } = route.params;
+  const { paymentMethod, address, totalPrice } = route.params;
 
   const handleCreateOrder = async () => {
     try {
@@ -63,7 +63,7 @@ const Pix: React.FC = () => {
         <ButtonNext
           onPress={handleCreateOrder}
           title={'Finalizar'}
-          amount={'30,00'}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
         />
       </View>
     </View>

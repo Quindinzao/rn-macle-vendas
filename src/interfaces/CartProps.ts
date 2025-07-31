@@ -26,3 +26,11 @@ export interface CartContextProps {
   deleteAllCart: () => void;
   refreshCart: () => void;
 }
+
+export interface ShoppingCartViewProps {
+  cartItems: CartItemProps[];
+  totalPrice: number;
+  refreshing: boolean;
+  onRefresh: () => void;
+  onGoToDelivery: () => void;
+}

@@ -57,6 +57,8 @@ const Delivery: React.FC = () => {
       }
     } else if (value === 'Sim!') {
       navigation.navigate('Address', { totalPrice });
+    } else {
+      showSnackbar('Selecione uma opção.');
     }
   };
 
@@ -77,7 +79,7 @@ const Delivery: React.FC = () => {
         <ButtonNext
           onPress={handleCreateOrder}
           title={value === 'Vou buscar' ? 'Finalizar' : 'Continuar'}
-          amount={totalPrice.toString()}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
         />
       </View>
     </View>

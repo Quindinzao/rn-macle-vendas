@@ -58,7 +58,7 @@ const PaymentMethod: React.FC = () => {
         <ButtonNext
           onPress={handleGoToCard}
           title={value === 'Dinheiro' ? 'Finalizar' : 'Continuar'}
-          amount={totalPrice.toString()}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
         />
       </View>
     </View>
