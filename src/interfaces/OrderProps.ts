@@ -20,3 +20,18 @@ export interface OrderGroupProps {
     status: 'pendente' | 'concluído' | 'cancelado' | 'em andamento';
   }[];
 }
+
+export interface OrderDetailProps {
+  orderId: number;
+  orderStatus: string;
+  orderPaymentMethod: string;
+  orderRequestDate: string;
+  orderUpdateDate: string;
+  orderAddress: string;
+  orderTotalPrice: number;
+}
+
+export interface OrderDetailModalProps extends OrderDetailProps {
+  visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
