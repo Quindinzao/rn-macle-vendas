@@ -19,8 +19,6 @@ export const useOrderController = () => {
     const userId = storageKey ? JSON.parse(storageKey).userId : null;
     if (!userId) return;
 
-    console.log('+1');
-
     setLoading(true);
     try {
       const response = await orderByUserId(userId);

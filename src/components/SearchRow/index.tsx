@@ -1,5 +1,4 @@
 // External libraries
-import { useState } from 'react';
 import { View } from 'react-native';
 
 // Components
@@ -19,16 +18,19 @@ import Filter from '../../assets/icons/Filter';
 import { layout } from '../../styles/globalStyle';
 import { createStyles } from './styles';
 
-const SearchRow: React.FC<SearchRowProps> = ({ onPress }) => {
-  const [search, setSearch] = useState('');
+const SearchRow: React.FC<SearchRowProps> = ({
+  onPress,
+  setSearchName,
+  searchName,
+}) => {
   const styles = createStyles(screenWidth);
 
   return (
     <View style={[layout.row, styles.container]}>
       <TextField
         label={'Pesquise por nome ou descrição'}
-        value={search}
-        onChangeText={event => setSearch(event)}
+        value={searchName || ''}
+        onChangeText={event => setSearchName?.(event)}
         style={styles.textField}
       />
       <Button mode={'text'} type={'image'} onPress={onPress}>

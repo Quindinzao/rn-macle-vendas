@@ -11,9 +11,12 @@ import { useProductsRequest } from '../../hooks/services/useProductsRequest';
 export const useHomeController = () => {
   const [visible, setVisible] = useState(false);
   const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [searchName, setSearchName] = useState('');
+  const [selectedOrdering, setSelectedOrdering] = useState('');
 
   const LIMIT = 10;
   const { productAll } = useProductsRequest();
@@ -45,7 +48,8 @@ export const useHomeController = () => {
       const mergedProducts = syncCartQuantities(response.products || []);
 
       if (response.products?.length > 0) {
-        setProducts(prev => [...prev, ...mergedProducts]);
+        const updated = [...products, ...mergedProducts];
+        setProducts(updated);
         setOffset(prev => prev + LIMIT);
       }
 
@@ -56,21 +60,46 @@ export const useHomeController = () => {
       setLoading(false);
       loadingRef.current = false;
     }
-  }, [offset, hasMore, cartItems]);
+  }, [offset, hasMore, cartItems, products, syncCartQuantities]);
+
+  const applyFilters = useCallback(() => {
+    let filtered = [...products];
+
+    if (searchName.trim() !== '') {
+      const searchTerm = searchName.trim().toLowerCase();
+      filtered = filtered.filter(product =>
+        product.name.toLowerCase().includes(searchTerm),
+      );
+    }
+
+    if (selectedOrdering.trim() !== '') {
+      if (selectedOrdering === 'A-Z') {
+        filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (selectedOrdering === 'Z-A') {
+        filtered = filtered.sort((a, b) => b.name.localeCompare(a.name));
+      }
+    }
+
+    setFilteredProducts(filtered);
+  }, [products, searchName, selectedOrdering]);
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
   useEffect(() => {
-    setProducts(prev => syncCartQuantities(prev));
-  }, [cartItems]);
+    applyFilters();
+  }, [products, searchName, selectedOrdering]);
 
   return {
     visible,
     setVisible,
-    products,
+    products: filteredProducts,
     loading,
     fetchProducts,
+    searchName,
+    setSearchName,
+    selectedOrdering,
+    setSelectedOrdering,
   };
 };

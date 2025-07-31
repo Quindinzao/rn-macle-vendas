@@ -8,4 +8,6 @@ export interface ModalBaseProps {
 export interface ModalFilterProps {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -18,6 +18,8 @@ const HomeView: React.FC<HomeViewProps> = ({
   fetchProducts,
   setVisible,
   titleHeader,
+  setSearchName,
+  searchName,
 }) => {
   return (
     <FlatList
@@ -34,6 +36,8 @@ const HomeView: React.FC<HomeViewProps> = ({
         <HeaderSection
           onFilterPress={() => setVisible(true)}
           title={titleHeader}
+          setSearchName={setSearchName}
+          searchName={searchName}
         />
       }
       ListFooterComponent={

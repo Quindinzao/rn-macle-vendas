@@ -12,4 +12,6 @@ export interface HeaderModalProps {
 export interface HeaderSectionProps {
   title: string;
   onFilterPress?: () => void;
+  setSearchName?: (value: string) => void;
+  searchName?: string;
 }

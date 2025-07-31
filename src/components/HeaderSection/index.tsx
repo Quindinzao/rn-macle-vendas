@@ -14,10 +14,18 @@ import { layout } from '../../styles/globalStyle';
 const HeaderSection: React.FC<HeaderSectionProps> = ({
   onFilterPress,
   title,
+  setSearchName,
+  searchName,
 }) => (
   <View style={layout.headerContainer}>
     <Header title={title} />
-    {onFilterPress && <SearchRow onPress={onFilterPress} />}
+    {onFilterPress && (
+      <SearchRow
+        searchName={searchName}
+        setSearchName={setSearchName}
+        onPress={onFilterPress}
+      />
+    )}
   </View>
 );
 

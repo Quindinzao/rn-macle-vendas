@@ -5,13 +5,18 @@ import FilterForm from '../../components/FilterForm';
 // Interfaces
 import { ModalFilterProps } from '../../interfaces/ModalProps';
 
-const ModalFilter: React.FC<ModalFilterProps> = ({ visible, setVisible }) => (
+const ModalFilter: React.FC<ModalFilterProps> = ({
+  visible,
+  setVisible,
+  value,
+  setValue,
+}) => (
   <ModalBase
     title={'Filtros e ordenação'}
     visible={visible}
     setVisible={setVisible}
   >
-    <FilterForm />
+    <FilterForm setValue={setValue} value={value} />
   </ModalBase>
 );
 
