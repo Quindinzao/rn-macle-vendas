@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from '../../styles/theme';
+import { screenWidth } from '../../utils/helpers/dimensions';
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      width: '100%',
+      width: screenWidth - 24,
       height: 106,
       borderRadius: theme.roundness,
       padding: theme.spacing.s08,

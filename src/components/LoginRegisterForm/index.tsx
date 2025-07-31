@@ -10,7 +10,7 @@ import TextField from '../../components/TextField';
 import { useAuth } from '../../contexts/AuthContext';
 
 // Hooks - Services
-import useUserRequest from '../../hooks/services/useUserRequest';
+import { useUserRequest } from '../../hooks/services/useUserRequest';
 
 // Hooks
 import { useAppTheme } from '../../hooks/common/useAppTheme';

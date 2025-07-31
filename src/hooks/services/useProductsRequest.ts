@@ -1,7 +1,7 @@
 // Services
 import { useApi } from './useApi';
 
-const useProductsRequest = () => {
+export const useProductsRequest = () => {
   const { api } = useApi();
 
   return {
@@ -16,5 +16,3 @@ const useProductsRequest = () => {
     },
   };
 };
-
-export default useProductsRequest;

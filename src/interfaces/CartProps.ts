@@ -23,5 +23,6 @@ export interface CartContextProps {
   createItem: (item: CartItemProps) => void;
   updateItem: (item: CartItemUpdateProps) => void;
   removeItem: (id: number) => void;
+  deleteAllCart: () => void;
   refreshCart: () => void;
 }

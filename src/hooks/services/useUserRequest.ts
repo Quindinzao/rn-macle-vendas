@@ -4,7 +4,7 @@ import { useApi } from './useApi';
 // Interfaces
 import { RegisterPayloadProps } from '../../interfaces/AuthProps';
 
-const useUserRequest = () => {
+export const useUserRequest = () => {
   const { api } = useApi();
 
   return {
@@ -27,5 +27,3 @@ const useUserRequest = () => {
     },
   };
 };
-
-export default useUserRequest;

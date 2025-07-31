@@ -13,6 +13,7 @@ import {
   insertOrUpdateOrder,
   deleteCart,
   updateOrder,
+  deleteAllOrder,
 } from '../database/cart';
 
 // Interfaces
@@ -94,6 +95,15 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const deleteAllCart = async () => {
+    try {
+      await deleteAllOrder();
+      await refreshCart();
+    } catch (error) {
+      console.log('Erro ao remover itens do carrinho:', error);
+    }
+  };
+
   useEffect(() => {
     refreshCart();
   }, []);
@@ -109,6 +119,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         refreshCart,
         totalPrice,
         refreshing,
+        deleteAllCart,
       }}
     >
       {children}

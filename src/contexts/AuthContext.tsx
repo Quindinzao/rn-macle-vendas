@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 
 // Hooks - Services
-import useUserRequest from '../hooks/services/useUserRequest';
+import { useUserRequest } from '../hooks/services/useUserRequest';
 
 // Interfaces
 import {

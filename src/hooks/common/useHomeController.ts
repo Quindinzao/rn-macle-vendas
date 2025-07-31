@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCartContext } from '../../contexts/CartContext';
 
 // Hooks - Services
-import useProductsRequest from '../../hooks/services/useProductsRequest';
+import { useProductsRequest } from '../../hooks/services/useProductsRequest';
 
 export const useHomeController = () => {
   const [visible, setVisible] = useState(false);

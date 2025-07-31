@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // External libraries
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -14,13 +13,13 @@ import ModalBase from '../../components/ModalBase';
 import CardForm from '../../components/CardForm';
 import Button from '../../components/Button';
 
-// Database
-import { getAllCards } from '../../database/card';
-
 // Contexts
 import { useSnackbar } from '../../contexts/SnackbarContext';
 import { useCartContext } from '../../contexts/CartContext';
-import useOrderRequests from '../../hooks/services/useOrderRequest';
+
+// Hooks
+import { useOrderRequest } from '../../hooks/services/useOrderRequest';
+import { useSavedCards } from '../../hooks/common/useSavedCard';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
@@ -28,38 +27,25 @@ import { RoutesProps } from '../../interfaces/RoutesProps';
 // Constants
 import { AUTH_KEY } from '../../constants/authKey';
 
-// Assets
-import Card from '../../assets/icons/Card';
-
 // Styles
 import { layout } from '../../styles/globalStyle';
 
-const Address: React.FC = () => {
-  const { cartItems } = useCartContext();
-  const { showSnackbar } = useSnackbar();
-  const { orderAll } = useOrderRequests();
+const Card: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
   const route = useRoute<RouteProp<RoutesProps, 'Card'>>();
-  const { totalPrice, paymentMethod, address } = route.params;
-  const [visible, setVisible] = useState(false);
-  const [value, setValue] = useState('');
-  const [savedCard, setSavedCard] = useState<{ title: string; image: any }[]>(
-    [],
-  );
-  const showModal = () => setVisible(true);
+  const { showSnackbar } = useSnackbar();
+  const { createOrder } = useOrderRequest();
 
-  const handleGoToAllDone = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'AllDone' }],
-    });
-  };
+  const { totalPrice, paymentMethod, address } = route.params;
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedCardId, setSelectedCardId] = useState('');
+
+  const savedCards = useSavedCards(isModalVisible);
+  const { cartItems, deleteAllCart } = useCartContext();
 
   const handleCreateOrder = async () => {
-    const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
-    const jsonStoredAuth = storedAuth ? JSON.parse(storedAuth) : null;
-
-    if (!value) {
+    if (!selectedCardId) {
       showSnackbar('Selecione um cartão para concluir o pagamento.');
       return;
     }
@@ -70,8 +56,11 @@ const Address: React.FC = () => {
     }
 
     try {
-      await orderAll(
-        jsonStoredAuth.userId,
+      const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
+      const authData = storedAuth ? JSON.parse(storedAuth) : null;
+
+      await createOrder(
+        authData?.userId,
         cartItems.map(item => ({
           productId: item.productId,
           quantity: item.quantity,
@@ -80,69 +69,51 @@ const Address: React.FC = () => {
         address,
       );
 
-      handleGoToAllDone();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'AllDone' }],
+      });
+
+      deleteAllCart();
     } catch (err) {
-      console.log({ err });
+      console.error(err);
       showSnackbar('Algo deu errado ao criar o pedido.');
     }
   };
 
-  const getItemCard = async () => {
-    try {
-      const items = await getAllCards();
-
-      const formattedCard = items.map((card: any) => {
-        const lastFour = card.cardNumber?.slice(-4) ?? '0000';
-        const maskedNumber = `•••• •••• •••• ${lastFour}`;
-
-        return {
-          title: `${card.nickname} - ${maskedNumber}`,
-          image: Card,
-        };
-      });
-
-      setSavedCard(formattedCard);
-    } catch (err: any) {
-      showSnackbar('Falha ao mostrar cartões.');
-    }
-  };
-
-  useEffect(() => {
-    getItemCard();
-  }, [visible]);
-
   return (
     <View style={layout.container}>
       <ScrollView>
-        <Header title={'Cartão'} isBack />
+        <Header title="Cartão" isBack />
         <View style={layout.content}>
           <RadioForm
-            title={'Cartões salvos'}
-            items={savedCard}
-            value={value}
-            setValue={setValue}
+            title="Cartões salvos"
+            items={savedCards}
+            value={selectedCardId}
+            setValue={setSelectedCardId}
           />
-          <Button mode={'text'} onPress={showModal}>
+          <Button mode="text" onPress={() => setIsModalVisible(true)}>
             Adicionar cartão
           </Button>
         </View>
       </ScrollView>
+
       <View style={layout.footer}>
         <ButtonNext
           onPress={handleCreateOrder}
-          title={'Finalizar'}
+          title="Finalizar"
           amount={totalPrice.toString()}
         />
         <ModalBase
-          title={'Adicione cartão'}
-          visible={visible}
-          setVisible={setVisible}
+          title="Adicione cartão"
+          visible={isModalVisible}
+          setVisible={setIsModalVisible}
         >
-          <CardForm setVisible={setVisible} />
+          <CardForm setVisible={setIsModalVisible} />
         </ModalBase>
       </View>
     </View>
   );
 };
 
-export default Address;
+export default Card;
