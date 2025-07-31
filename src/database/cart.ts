@@ -93,3 +93,8 @@ export const deleteCart = async (id: number) => {
   const db = await getDBConnection();
   await db.executeSql(`DELETE FROM Cart WHERE id = ?;`, [id]);
 };
+
+export const deleteAllOrder = async () => {
+  const db = await getDBConnection();
+  await db.executeSql(`DELETE FROM Cart;`);
+};

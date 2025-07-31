@@ -6,9 +6,6 @@ import { ScrollView, View } from 'react-native';
 import Button from '../Button';
 import TextField from '../TextField';
 
-// Contexts
-import { useSnackbar } from '../../contexts/SnackbarContext';
-
 // Database
 import { insertCard } from '../../database/card';
 
@@ -23,7 +20,7 @@ import {
 import { formatCardNumber } from '../../utils/validators/cardNumberMask';
 import { formatExpirationDate } from '../../utils/validators/expirationDateMask';
 import { formatCvv } from '../../utils/validators/cvvMask';
-import { cardFormValidator } from '../../utils/validators/cardFormValidatos';
+import { cardFormValidator } from '../../utils/validators/cardFormValidator';
 
 // Interfaces
 import { CardFields, CardFormProps } from '../../interfaces/CardProps';
@@ -35,7 +32,6 @@ import { layout } from '../../styles/globalStyle';
 const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme);
-  const { showSnackbar } = useSnackbar();
 
   const [form, setForm] = useState<Record<CardFields, string>>({
     nickname: '',
@@ -71,32 +67,28 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   );
 
   const handleSubmit = () => {
-    // const newErrors = validateCardFields(form);
-    // setErrors(newErrors);
+    const newErrors = validateCardFields(form);
+    setErrors(newErrors);
 
-    // const isValid =
-    //   Object.values(newErrors).every(error => !error) &&
-    //   cardFormValidator(form);
+    const isValid =
+      Object.values(newErrors).every(error => !error) &&
+      cardFormValidator(form);
 
-    // console.log({ isValid });
-
-    // if (isValid) {
-    //   insertCard({
-    //     nickname: form.nickname,
-    //     cardNumber: form.cardNumber,
-    //     cvv: form.cvv,
-    //     expirationDate: form.expirationDate,
-    //   });
-    //   setForm({
-    //     nickname: '',
-    //     cardNumber: '',
-    //     cvv: '',
-    //     expirationDate: '',
-    //   });
-    //   setVisible(false);
-    // } else {
-    showSnackbar('Cartão inválido.');
-    // }
+    if (isValid) {
+      insertCard({
+        nickname: form.nickname,
+        cardNumber: form.cardNumber,
+        cvv: form.cvv,
+        expirationDate: form.expirationDate,
+      });
+      setForm({
+        nickname: '',
+        cardNumber: '',
+        cvv: '',
+        expirationDate: '',
+      });
+      setVisible(false);
+    }
   };
 
   const renderInput = (

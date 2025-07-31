@@ -23,7 +23,6 @@ import { AUTH_KEY } from '../constants/authKey';
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-// Função para decodificar JWT e obter o campo exp
 const decodeToken = (token: string) => {
   try {
     const decoded = jwtDecode<{ exp: number }>(token);
@@ -86,6 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const auth: AuthData = {
         token: result.token,
         exp,
+        userId: result.user.id,
       };
 
       setAuthData(auth);

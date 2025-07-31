@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components
 import Header from '../../components/Header';
@@ -13,27 +14,31 @@ import ModalBase from '../../components/ModalBase';
 import CardForm from '../../components/CardForm';
 import Button from '../../components/Button';
 
+// Database
+import { getAllCards } from '../../database/card';
+
+// Contexts
+import { useSnackbar } from '../../contexts/SnackbarContext';
+import { useCartContext } from '../../contexts/CartContext';
+import useOrderRequests from '../../hooks/services/useOrderRequest';
+
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Constants
-// import { savedCard } from '../../constants/savedCard';
+import { AUTH_KEY } from '../../constants/authKey';
+
+// Assets
+import Card from '../../assets/icons/Card';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { getAllCards } from '../../database/card';
-import Card from '../../assets/icons/Card';
-import { useSnackbar } from '../../contexts/SnackbarContext';
 
 const Address: React.FC = () => {
+  const { cartItems } = useCartContext();
   const { showSnackbar } = useSnackbar();
+  const { orderAll } = useOrderRequests();
   const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
-  const handleGoToAllDone = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'AllDone' }],
-    });
-  };
   const route = useRoute<RouteProp<RoutesProps, 'Card'>>();
   const { totalPrice, paymentMethod, address } = route.params;
   const [visible, setVisible] = useState(false);
@@ -42,6 +47,45 @@ const Address: React.FC = () => {
     [],
   );
   const showModal = () => setVisible(true);
+
+  const handleGoToAllDone = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'AllDone' }],
+    });
+  };
+
+  const handleCreateOrder = async () => {
+    const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
+    const jsonStoredAuth = storedAuth ? JSON.parse(storedAuth) : null;
+
+    if (!value) {
+      showSnackbar('Selecione um cartão para concluir o pagamento.');
+      return;
+    }
+
+    if (!cartItems || cartItems.length === 0) {
+      showSnackbar('Seu carrinho está vazio.');
+      return;
+    }
+
+    try {
+      await orderAll(
+        jsonStoredAuth.userId,
+        cartItems.map(item => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        })),
+        paymentMethod,
+        address,
+      );
+
+      handleGoToAllDone();
+    } catch (err) {
+      console.log({ err });
+      showSnackbar('Algo deu errado ao criar o pedido.');
+    }
+  };
 
   const getItemCard = async () => {
     try {
@@ -85,7 +129,7 @@ const Address: React.FC = () => {
       </ScrollView>
       <View style={layout.footer}>
         <ButtonNext
-          onPress={handleGoToAllDone}
+          onPress={handleCreateOrder}
           title={'Finalizar'}
           amount={totalPrice.toString()}
         />
