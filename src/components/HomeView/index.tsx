@@ -44,7 +44,7 @@ const HomeView: React.FC<HomeViewProps> = ({
         loading ? <ActivityIndicator size={'large'} /> : null
       }
       ListEmptyComponent={
-        loading ? (
+        !loading ? (
           <EmptyList message={'Lista vazia. Tente novamente mais tarde.'} />
         ) : null
       }
