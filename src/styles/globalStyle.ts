@@ -17,6 +17,7 @@ export const layout = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: theme.spacing.s12,
+    backgroundColor: theme.colors.background,
   },
   footer: {
     width: '100%',

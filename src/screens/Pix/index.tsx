@@ -1,67 +1,41 @@
 // External libraries
-import { ScrollView, View } from 'react-native';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Image, ScrollView, View } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 // Components
 import Header from '../../components/Header';
 import ButtonNext from '../../components/ButtonNext';
+
+// Hooks
+import { useCreateOrder } from '../../hooks/common/useCreateOrder';
 
 // Interfaces
 import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { useCartContext } from '../../contexts/CartContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AUTH_KEY } from '../../constants/authKey';
-import { useOrderRequest } from '../../hooks/services/useOrderRequest';
-import { useSnackbar } from '../../contexts/SnackbarContext';
 
 const Pix: React.FC = () => {
-  const { cartItems, deleteAllCart } = useCartContext();
-  const { createOrder } = useOrderRequest();
-  const { showSnackbar } = useSnackbar();
-  const navigation = useNavigation<NativeStackNavigationProp<RoutesProps>>();
   const route = useRoute<RouteProp<RoutesProps, 'Pix'>>();
   const { paymentMethod, address, totalPrice } = route.params;
 
-  const handleCreateOrder = async () => {
-    try {
-      const storedAuth = await AsyncStorage.getItem(AUTH_KEY);
-      const authData = storedAuth ? JSON.parse(storedAuth) : null;
+  const { handleCreateOrder } = useCreateOrder();
 
-      await createOrder(
-        authData?.userId,
-        cartItems.map(item => ({
-          productId: item.productId,
-          quantity: item.quantity,
-        })),
-        paymentMethod,
-        address,
-      );
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'AllDone' }],
-      });
-
-      deleteAllCart();
-    } catch (err) {
-      console.error(err);
-      showSnackbar('Algo deu errado ao criar o pedido.');
-    }
+  const onFinish = () => {
+    handleCreateOrder({ paymentMethod, address });
   };
 
   return (
-    <View style={layout.center}>
+    <View style={layout.container}>
       <ScrollView>
         <Header title={'PIX'} isBack />
-        <View style={layout.content} />
+        <View style={layout.content}>
+          <Image source={require('../../assets/png/qrcode.png')} />
+        </View>
       </ScrollView>
       <View style={layout.footer}>
         <ButtonNext
-          onPress={handleCreateOrder}
+          onPress={onFinish}
           title={'Finalizar'}
           amount={totalPrice.toFixed(2).replace('.', ',')}
         />
