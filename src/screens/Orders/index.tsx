@@ -9,7 +9,7 @@ const Order: React.FC = () => {
 
   return (
     <OrderView
-      titleHeader="Pedidos"
+      titleHeader={'Pedidos'}
       orders={orders.reverse()}
       loading={loading}
     />

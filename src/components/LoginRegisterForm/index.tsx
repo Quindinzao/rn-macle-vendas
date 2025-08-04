@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // External libraries
 import { useCallback, useState } from 'react';
 import { View } from 'react-native';
@@ -8,6 +9,7 @@ import TextField from '../../components/TextField';
 
 // Contexts
 import { useAuth } from '../../contexts/AuthContext';
+import { useSnackbar } from '../../contexts/SnackbarContext';
 
 // Hooks - Services
 import { useUserRequest } from '../../hooks/services/useUserRequest';
@@ -21,6 +23,7 @@ import { createStyles } from './styles';
 const LoginRegisterForm: React.FC = () => {
   const { handleSignIn } = useAuth();
   const { userRegister } = useUserRequest();
+  const { showSnackbar } = useSnackbar();
 
   const [credentials, setCredentials] = useState({
     username: '',
@@ -59,19 +62,20 @@ const LoginRegisterForm: React.FC = () => {
   const handleRegister = useCallback(() => {
     if (!validateForm()) return;
     userRegister({ ...credentials });
+    showSnackbar('Usuário criado com sucesso!');
   }, [credentials, validateForm, userRegister]);
 
   return (
     <View style={styles.container}>
       <TextField
-        label="Usuário"
+        label={'Usuário'}
         value={credentials.username}
         onChangeText={value => handleInputChange('username', value)}
         error={!!errors.username}
         errorMessage={errors.username}
       />
       <TextField
-        label="Senha"
+        label={'Senha'}
         value={credentials.password}
         onChangeText={value => handleInputChange('password', value)}
         secureTextEntry
@@ -79,10 +83,10 @@ const LoginRegisterForm: React.FC = () => {
         errorMessage={errors.password}
       />
 
-      <Button mode="contained" onPress={handleLogin}>
+      <Button mode={'contained'} onPress={handleLogin}>
         Entrar
       </Button>
-      <Button mode="text" onPress={handleRegister}>
+      <Button mode={'text'} onPress={handleRegister}>
         Cadastrar
       </Button>
     </View>

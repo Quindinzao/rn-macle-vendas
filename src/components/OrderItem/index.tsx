@@ -10,7 +10,7 @@ import ModalOrder from '../ModalOrder';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { OrderDetailModalProps } from '../../interfaces/OrderProps';
+import { ModalOrderDetailProps } from '../../interfaces/ModalProps';
 
 // Assets
 import Next from '../../assets/icons/Next';
@@ -18,7 +18,7 @@ import Next from '../../assets/icons/Next';
 // Styles
 import { createStyles } from './styles';
 
-const OrderItem: React.FC<OrderDetailModalProps> = ({
+const OrderItem: React.FC<ModalOrderDetailProps> = ({
   orderId,
   orderStatus,
   orderPaymentMethod,

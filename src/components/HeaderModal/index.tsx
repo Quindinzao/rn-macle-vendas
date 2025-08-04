@@ -9,7 +9,7 @@ import Button from '../Button';
 import { useAppTheme } from '../../hooks/common/useAppTheme';
 
 // Interfaces
-import { HeaderModalProps } from '../../interfaces/HeaderProps';
+import { ModalHeaderProps } from '../../interfaces/ModalProps';
 
 // Utils
 import { isIOS } from '../../utils/helpers/platform';
@@ -20,7 +20,7 @@ import CloseModal from '../../assets/icons/CloseModal';
 // Styles
 import { createStyles } from './styles';
 
-const HeaderModal: React.FC<HeaderModalProps> = ({ title, onClose }) => {
+const HeaderModal: React.FC<ModalHeaderProps> = ({ title, onClose }) => {
   const theme = useAppTheme();
   const styles = createStyles(theme, isIOS);
 
@@ -34,7 +34,7 @@ const HeaderModal: React.FC<HeaderModalProps> = ({ title, onClose }) => {
       >
         <CloseModal height={30} width={30} />
       </Button>
-      <Text type="titleSmall">{title}</Text>
+      <Text type={'titleSmall'}>{title}</Text>
     </Surface>
   );
 };

@@ -3,9 +3,9 @@ import ModalBase from '../ModalBase';
 import OrderDetail from '../OrderDetail';
 
 // Interfaces
-import { OrderDetailModalProps } from '../../interfaces/OrderProps';
+import { ModalOrderDetailProps } from '../../interfaces/ModalProps';
 
-const ModalOrder: React.FC<OrderDetailModalProps> = ({
+const ModalOrder: React.FC<ModalOrderDetailProps> = ({
   orderId,
   orderStatus,
   orderPaymentMethod,

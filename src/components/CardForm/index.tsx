@@ -1,5 +1,5 @@
 // External libraries
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 // Components
@@ -109,7 +109,7 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
   return (
     <ScrollView
       style={styles.container}
-      keyboardShouldPersistTaps="handled"
+      keyboardShouldPersistTaps={'handled'}
       showsVerticalScrollIndicator={false}
     >
       {renderInput('Apelido', 'nickname')}
@@ -124,7 +124,7 @@ const CardForm: React.FC<CardFormProps> = ({ setVisible }) => {
         </View>
       </View>
 
-      <Button mode="contained" onPress={handleSubmit}>
+      <Button mode={'contained'} onPress={handleSubmit}>
         Adicionar
       </Button>
     </ScrollView>

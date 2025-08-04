@@ -1,10 +1,10 @@
 // External libraries
-import { FlatList, RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 
 // Components
 import HeaderSection from '../HeaderSection';
 import ProductItem from '../ProductItem';
-import ButtonNext from '../ButtonNext';
+import Footer from '../Footer';
 import EmptyList from '../EmptyList';
 
 // Interfaces
@@ -53,13 +53,11 @@ const ShoppingCartView: React.FC<ShoppingCartViewProps> = ({
       />
 
       {cartItems.length > 0 && (
-        <View style={layout.footer}>
-          <ButtonNext
-            onPress={onGoToDelivery}
-            title={'Continuar'}
-            amount={totalPrice.toFixed(2).replace('.', ',')}
-          />
-        </View>
+        <Footer
+          onPress={onGoToDelivery}
+          title={'Continuar'}
+          amount={totalPrice.toFixed(2).replace('.', ',')}
+        />
       )}
     </>
   );

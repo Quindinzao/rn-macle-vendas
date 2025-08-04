@@ -4,7 +4,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 
 // Components
 import Header from '../../components/Header';
-import ButtonNext from '../../components/ButtonNext';
+import Footer from '../../components/Footer';
 
 // Hooks
 import { useCreateOrder } from '../../hooks/common/useCreateOrder';
@@ -33,13 +33,11 @@ const Pix: React.FC = () => {
           <Image source={require('../../assets/png/qrcode.png')} />
         </View>
       </ScrollView>
-      <View style={layout.footer}>
-        <ButtonNext
-          onPress={onFinish}
-          title={'Finalizar'}
-          amount={totalPrice.toFixed(2).replace('.', ',')}
-        />
-      </View>
+      <Footer
+        onPress={onFinish}
+        title={'Finalizar'}
+        amount={totalPrice.toFixed(2).replace('.', ',')}
+      />
     </View>
   );
 };

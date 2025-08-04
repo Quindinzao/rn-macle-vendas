@@ -26,7 +26,7 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <>
       {errorMessage && (
-        <HelperText type="error" visible={error}>
+        <HelperText type={'error'} visible={error}>
           {errorMessage}
         </HelperText>
       )}
@@ -38,8 +38,8 @@ const TextField: React.FC<TextFieldProps> = ({
         keyboardType={keyboardType}
         style={[styles.container, style]}
         contentStyle={styles.content}
-        underlineColor="transparent"
-        mode="flat"
+        underlineColor={'transparent'}
+        mode={'flat'}
         error={error}
       />
     </>

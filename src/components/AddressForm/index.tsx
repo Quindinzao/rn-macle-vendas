@@ -1,5 +1,5 @@
 // External libraries
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { ScrollView, View } from 'react-native';
 
 // Components
@@ -119,7 +119,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
   return (
     <ScrollView
       style={styles.container}
-      keyboardShouldPersistTaps="handled"
+      keyboardShouldPersistTaps={'handled'}
       showsVerticalScrollIndicator={false}
     >
       {renderInput('Cidade', 'city')}
@@ -136,7 +136,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ setVisible }) => {
         </View>
       </View>
 
-      <Button mode="contained" onPress={handleSubmit}>
+      <Button mode={'contained'} onPress={handleSubmit}>
         Adicionar
       </Button>
     </ScrollView>

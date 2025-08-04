@@ -37,8 +37,6 @@ export const useCreateOrder = () => {
       const storageKey = await AsyncStorage.getItem(AUTH_KEY);
       const userId = storageKey ? JSON.parse(storageKey).userId : null;
 
-      console.log({ userId });
-
       await createOrder(
         userId,
         cartItems.map(item => ({

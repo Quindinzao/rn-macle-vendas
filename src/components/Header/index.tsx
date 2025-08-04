@@ -50,8 +50,8 @@ const Header: React.FC<HeaderProps> = ({
   const renderBackButton = () => (
     <Button
       style={styles.back}
-      mode="text"
-      type="image"
+      mode={'text'}
+      type={'image'}
       onPress={navigation.goBack}
     >
       <Arrow height={30} width={30} />
@@ -61,8 +61,8 @@ const Header: React.FC<HeaderProps> = ({
   const renderLogoutButton = () => (
     <Button
       style={styles.signOut}
-      mode="text"
-      type="image"
+      mode={'text'}
+      type={'image'}
       onPress={confirmLogout}
     >
       <Logout height={30} width={30} />
@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({
         ? renderBackButton()
         : typeHeader === 'short' && renderLogoutButton()}
       <Logo style={styles.logo} height={58.25} width={59.5} />
-      <Text type="titleLarge" style={styles.text}>
+      <Text type={'titleLarge'} style={styles.text}>
         {title}
       </Text>
     </Surface>

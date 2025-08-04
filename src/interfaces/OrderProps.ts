@@ -31,11 +31,6 @@ export interface OrderDetailProps {
   orderTotalPrice: number;
 }
 
-export interface OrderDetailModalProps extends OrderDetailProps {
-  visible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export interface ParamsProps {
   paymentMethod?: string;
   address?: string;

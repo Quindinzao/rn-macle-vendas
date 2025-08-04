@@ -1,13 +1,15 @@
 // External libraries
 import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Components
-import Header from '../../components/Header';
-import RadioForm from '../../components/RadioForm';
-import ButtonNext from '../../components/ButtonNext';
+import Footer from '../../components/Footer';
+import SelectableScreen from '../../components/SelectableScreen';
+
+// Contexts
+import { useSnackbar } from '../../contexts/SnackbarContext';
 
 // Constants
 import { paymentMethod } from '../../constants/paymentMethod';
@@ -17,7 +19,6 @@ import { RoutesProps } from '../../interfaces/RoutesProps';
 
 // Styles
 import { layout } from '../../styles/globalStyle';
-import { useSnackbar } from '../../contexts/SnackbarContext';
 
 const PaymentMethod: React.FC = () => {
   const [value, setValue] = useState('');
@@ -41,26 +42,21 @@ const PaymentMethod: React.FC = () => {
       showSnackbar('Selecione um método de pagamento.');
     }
   };
+
   return (
     <View style={layout.container}>
-      <ScrollView>
-        <Header title={'Método de pagamento'} isBack />
-        <View style={layout.content}>
-          <RadioForm
-            title={'Escolha o método de pagamento'}
-            items={paymentMethod}
-            value={value}
-            setValue={setValue}
-          />
-        </View>
-      </ScrollView>
-      <View style={layout.footer}>
-        <ButtonNext
-          onPress={handleGoToCard}
-          title={value === 'Dinheiro' ? 'Finalizar' : 'Continuar'}
-          amount={totalPrice.toFixed(2).replace('.', ',')}
-        />
-      </View>
+      <SelectableScreen
+        title={'Método de pagamento'}
+        radioTitle={'Escolha o método de pagamento'}
+        items={paymentMethod}
+        value={value}
+        setValue={setValue}
+      />
+      <Footer
+        onPress={handleGoToCard}
+        title={value === 'Dinheiro' ? 'Finalizar' : 'Continuar'}
+        amount={totalPrice.toFixed(2).replace('.', ',')}
+      />
     </View>
   );
 };

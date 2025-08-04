@@ -1,15 +1,12 @@
 // External libraries
 import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 // Components
-import Header from '../../components/Header';
-import RadioForm from '../../components/RadioForm';
-import ButtonNext from '../../components/ButtonNext';
-import ModalBase from '../../components/ModalBase';
-import CardForm from '../../components/CardForm';
-import Button from '../../components/Button';
+import Footer from '../../components/Footer';
+import ModalCardForm from '../../components/ModalCardForm';
+import SelectableScreen from '../../components/SelectableScreen';
 
 // Contexts
 import { useSnackbar } from '../../contexts/SnackbarContext';
@@ -46,35 +43,23 @@ const Card: React.FC = () => {
 
   return (
     <View style={layout.container}>
-      <ScrollView>
-        <Header title="Cartão" isBack />
-        <View style={layout.content}>
-          <RadioForm
-            title="Cartões salvos"
-            items={savedCards}
-            value={selectedCardId}
-            setValue={setSelectedCardId}
-          />
-          <Button mode="text" onPress={() => setIsModalVisible(true)}>
-            Adicionar cartão
-          </Button>
-        </View>
-      </ScrollView>
+      <SelectableScreen
+        title={'Cartão'}
+        radioTitle={'Cartões salvos'}
+        items={savedCards}
+        value={selectedCardId}
+        setValue={setSelectedCardId}
+        showAddButton
+        onAddPress={() => setIsModalVisible(true)}
+        addButtonLabel={'Adicionar cartão'}
+      />
+      <Footer
+        onPress={onFinish}
+        title={'Finalizar'}
+        amount={totalPrice.toFixed(2).replace('.', ',')}
+      />
 
-      <View style={layout.footer}>
-        <ButtonNext
-          onPress={onFinish}
-          title="Finalizar"
-          amount={totalPrice.toFixed(2).replace('.', ',')}
-        />
-        <ModalBase
-          title="Adicione cartão"
-          visible={isModalVisible}
-          setVisible={setIsModalVisible}
-        >
-          <CardForm setVisible={setIsModalVisible} />
-        </ModalBase>
-      </View>
+      <ModalCardForm visible={isModalVisible} setVisible={setIsModalVisible} />
     </View>
   );
 };
